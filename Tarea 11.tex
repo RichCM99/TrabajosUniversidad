@@ -1,0 +1,328 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+
+% Para mejores márgenes
+\usepackage{geometry}
+\usepackage{fancyhdr} %este lo puse yo
+\usepackage{setspace} %este tambien
+
+% Paquetes estándar de matemáticas
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % para la familia \mathscr
+\usepackage{derivative} % lo puse yo
+
+% Teoremas 
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposición}
+\newtheorem{lem}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definición}
+\newtheorem{pre}{Pregunta}
+
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+% Respuesta
+\newenvironment{prueba}{\renewcommand{\proofname}{Prueba}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+
+% Enumeración
+\usepackage{enumitem}
+
+% Tablas bonitas
+\usepackage{booktabs}
+
+% Diagramas
+\usepackage{tikz-cd}
+
+% Verbatim
+\usepackage{fancyvrb}
+
+% Color y Links
+\usepackage{xcolor}
+\definecolor{mine}{RGB}{0,0,180}
+\usepackage{hyperref}
+\hypersetup{final,hidelinks, colorlinks, linkcolor = mine, citecolor = mine,
+  urlcolor = mine}
+
+
+%%% Macros
+
+%% Valor absoluto y norma
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Conjuntos de números
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+
+\def\r{\mathbb{R}}
+\def\rn{\mathbb{R}^n}
+\def\z{\mathbb{Z}}
+\def\n{\mathbb{N}}
+\def\s{\mathbb{S}}
+\def\eps{\varepsilon}
+\def\o{\Omega}
+\def\vp{\varphi}
+\def\rh{\rightharpoonup}
+\def\io{\int_{\Omega}}
+\def\irn{\int_{\r^N}}
+\def\d{\mathrm{d}}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\sin{\mathrm{sen}}
+\def\id{\mathrm{id}}
+
+\title{Tarea 11}
+\date{\today}
+\author{Ricardo Cruz Martínez}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item Sea $f\in\cC^0[0,1]$ tal que
+  \begin{equation*}
+    \int_0^1f(x)\,x^n\,\d x=0\qquad\forall n\in\n\cup\{0\}.
+  \end{equation*}
+Prueba que $f(x)=0$ para todo $x\in [0,1]$.
+\begin{proof}
+Por el Teorema de Aproximación de Weierstrass, $\exists (p_{k})$ una sucesión de polinomios en $[0,1]$ que converge uniformemente a $f$.\\
+Por otra parte, sea $p:[0,1]\longrightarrow{\R}$ un polinomio.\\
+ Supongamos que $p(x)=a_{0}+a_{1}x+\cdots+a_{n}x^{n}=\displaystyle\sum_{i=0}^{n}a_{i}x^{i}$, p.a. $a_{1},\cdots,a_{n}\in{\R}$\\
+ Notemos que
+ \begin{center}
+ $f(x)p(x)=\displaystyle\sum_{i=0}^{n}f(x)a_{i}x^{i}$
+ \end{center}
+ Seguido de esto, por linealidad de la integral y por hipótesis tenemos que 
+ \begin{center}
+ $\displaystyle\int_{0}^{1}f(x)p(x)dx=\int_{0}^{1}\sum_{i=0}^{n}f(x)a_{i}x^{i}dx=\sum_{i=0}^{n}a_{i}\int_{0}^{1}f(x)x^{i}dx=\sum_{i=0}^{n}a_{i}\cdot 0=0$
+ \end{center}
+ De esto último, concluimos que $\displaystyle\int_{0}^{1}f(x)p(x)dx=0$ para todo polinomio definido en $[0,1]$.\\
+ Así
+ \begin{center}
+ $\displaystyle\int_{0}^{1}f(x)p_{k}(x)dx=0\quad\forall k\in{\N}$
+ \end{center}
+ Y como $p_{k}\longrightarrow f$ uniformemente en $\cC^{0}([0,1])$, se sigue que
+ \begin{center}
+ $0=\displaystyle\lim_{k\longrightarrow\infty}\int_{0}^{1}f(x)p_{k}(x)dx=\int_{0}^{1}\lim_{k\longrightarrow\infty}f(x)p_{k}(x)dx=\int_{0}^{1}f(x)\lim_{k\longrightarrow\infty}p_{k}(x)dx=\int_{0}^{1}f^{2}(x)dx$
+ \end{center}
+ $\therefore\displaystyle\int_{0}^{1}f^{2}(x)dx=0$.\\
+ Además, $f^{2}(x)\geq 0\quad\forall x\in[0,1]$, y como $f$ es continua por hipótesis, entonces $f^{2}$ también lo es, por lo que concluimos que $f(x)=0\quad\forall x\in[0,1]$
+\end{proof}
+
+\item Sea $\s^1=\{(\cos\theta,\sen\theta)\in\r^2:0\leq\theta<2\pi\}$ el círculo unitario en $\r^2$. Prueba que cualquier función continua $f:\s^1\to\r$ es el límite uniforme de funciones de la forma
+  \begin{equation*}
+    \varphi(\cos\theta,\sen\theta)=a_0+a_1\cos\theta+b_1\sen\theta+\cdots+a_n\cos n\theta+b_n\sen n\theta
+  \end{equation*}
+con $a_i,b_i\in\r$, $n\in\n\cup\{0\}$.
+\begin{spacing}{1.4}
+\begin{proof}
+Notemos que $\s^{1}$ es compacto, pues $\s^{1}=fr(B_{1}(0))$, la cual siempre es cerrada (la frontera de un conjunto siempre es cerrada) en ${\R}^{2}$ y claramente es acotada en ${\R}^{2}$, así, por el Teorema de Heine-Borel, tenemos que $\s^{1}$ es compacto en ${\R}^{2}$.\\
+Definimos 
+$A=\{\phi\in\cC^{0}(\s^{1}):\phi(\cos(\theta),sen(\theta))=a_0+a_1\cos\theta+b_1\sen\theta+\cdots+a_n\cos n\theta+b_n\sen n\theta,\quad n\in{\N}\cup\{0\},\theta\in[0,2\pi),a_{i},b_{i}\in{\R}\}$\\
+Donde $A\subset\cC^{0}(\s^{1})$\\
+Veamos que $A$ cumple las hipótesis del Teorema de Stone Weierstrass
+\begin{enumerate}
+\item Sean $\varphi,\eta\in A$, $\alpha,\lambda\in{\R}$\\
+Queremos ver que $\alpha\varphi+\lambda\eta\in A$\\
+Como $\varphi\in A$, $\exists n\in{\N}\cup\{0\}$, $\exists a_{i},b_{i}\in{\R}$, $i\in\{1,\cdots,n\}$ tales que 
+\begin{center}
+$\varphi(\cos(\theta),\sen(\theta))=a_{0}+a_{1}\cos(\theta)+\cdots+a_{n}\cos(n\theta)+b_{n}\sen(n\theta)$
+\end{center}
+Y como $\eta\in A$, $\exists k\in{\N}\cup\{0\}$, $\exists c_{i},d_{i}\in{\R}$, $i\in\{1,\cdots k\}$ tales que 
+\begin{center}
+$\eta(\cos(\theta),\sen(\theta))=c_{0}+c_{1}\cos(\theta)+\cdots+c_{k}\cos(k\theta)+d_{k}\sen(k\theta)$
+\end{center}
+Además, tenemos que 
+\begin{center}
+$\alpha\varphi(\cos(\theta),\sen(\theta))=\alpha a_{0}+\alpha a_{1}\cos(\theta)+\cdots+\alpha a_{n}\cos(n\theta)+\alpha b_{n}\sen(n\theta)$\\
+$\lambda\eta(\cos(\theta),\sen(\theta))=\lambda c_{0}+\lambda c_{1}\cos(\theta)+\cdots+\lambda c_{k}\cos(k\theta)+\lambda d_{k}\sen(k\theta)$
+\end{center}
+Sin perder generalidad, supongamos que $k\leq n$, por lo que de lo anterior tenemos lo siguiente
+\begin{equation*}
+\begin{split}
+(\alpha\varphi+\lambda\eta)(\cos(\theta),\sen(\theta)) & = (\alpha a_{0}+\lambda c_{0})+(\alpha a_{1}+\lambda c_{1})\cos(\theta)+\cdots+(\alpha a_{k}+\lambda c_{k})\cos(k\theta)\\ 
+& + (\alpha b_{k}+\lambda d_{k})\sen(k\theta)+\alpha a_{k+1}\cos((k+1)\theta)+\alpha b_{k+1}\sen((k+1)\theta)+\cdots\\
+& + \alpha a_{n}\cos(n\theta)+\alpha b_{n}\sen(n\theta)
+\end{split}
+\end{equation*}
+Y notemos que $\alpha\varphi+\lambda\eta\in A$
+
+\item Sean $\varphi,\eta\in A$\\
+Queremos ver que $\varphi\eta\in A$\\
+Como $\varphi\in A$, $\exists n\in{\N}\cup\{0\}$, $\exists a_{i},b_{i}\in{\R}$, $i\in\{1,\cdots,n\}$ tales que 
+\begin{center}
+$\varphi(\cos(\theta),\sen(\theta))=a_{0}+a_{1}\cos(\theta)+\cdots+a_{n}\cos(n\theta)+b_{n}\sen(n\theta)$
+\end{center}
+Y como $\eta\in A$, $\exists k\in{\N}\cup\{0\}$, $\exists c_{i},d_{i}\in{\R}$, $i\in\{1,\cdots k\}$ tales que 
+\begin{center}
+$\eta(\cos(\theta),\sen(\theta))=c_{0}+c_{1}\cos(\theta)+\cdots+c_{k}\cos(k\theta)+d_{k}\sen(k\theta)$
+\end{center}
+Nuevamente, sin perder generalidad, supongamos que $n\leq k$\\
+De Variable Compleja 1, sabemos que las funciones $\sen,\cos$ definidas en los complejos, son una generalización de estas mismas funciones pero en los reales, donde 
+\begin{center}
+$\sen(n\theta)=\dfrac{e^{in\theta}-e^{-in\theta}}{2i}$ \quad y $\cos(n\theta)=\dfrac{e^{in\theta}+e^{-in\theta}}{2}$ 
+\end{center} 
+Veamos que ocurre cuando multiplicamos $\sen(j\theta)\cos(k\theta)$ con $j,k\in\{1,\cdots n\}$
+\begin{equation*}
+\begin{split}
+\sen(j\theta)\cos(k\theta) & = \dfrac{(e^{ij\theta}-e^{-ij\theta})(e^{ik\theta}+e^{-ik\theta})}{4i} \\
+& = \dfrac{e^{i(j+k)\theta}-e^{i(-j+k)\theta}+e^{i(j-k)\theta}-e^{-i(j+k)\theta}}{4i}\\
+& = \dfrac{e^{i(j+k)\theta}-e^{-i(j+k)\theta}}{4i}+\dfrac{e^{i(j-k)\theta}-e^{-i(j-k)\theta}}{4i}\\
+& = \frac{1}{2}\sen((j+k)\theta)+\frac{1}{2}\sen((j-k)\theta)
+\end{split}
+\end{equation*}
+Ahora, veamos que da cuando multiplicamos $\sen(j\theta)\sen(k\theta)$ con $j,k\in\{1,\cdots n\}$ 
+\begin{equation*}
+\begin{split}
+\sen(j\theta)\sen(k\theta) & = \dfrac{(e^{ij\theta}-e^{-ij\theta})(e^{ik\theta}-e^{-ik\theta})}{(2i)(2i)} \\
+& = \dfrac{-e^{i(j+k)\theta}+e^{i(-j+k)\theta}+e^{i(j-k)\theta}-e^{-i(j+k)\theta}}{4}\\
+& = -\dfrac{e^{i(j+k)\theta}+e^{-i(j+k)\theta}}{4}+\dfrac{e^{i(-j+k)\theta}+e^{-i(-j+k)\theta}}{4}\\
+& = -\frac{1}{2}\cos((j+k)\theta)+\frac{1}{2}\cos((-j+k)\theta)
+\end{split}
+\end{equation*} 
+Y finalmente veamos que da cuando multiplicamos $\cos(j\theta)\cos(k\theta)$ con $j,k\in\{1,\cdots n\}$
+\begin{equation*}
+\begin{split}
+\cos(j\theta)\cos(k\theta) & = \dfrac{(e^{ij\theta}+e^{-ij\theta})(e^{ik\theta}+e^{-ik\theta})}{4} \\
+& = \dfrac{e^{i(j+k)\theta}+e^{i(-j+k)\theta}+e^{i(j-k)\theta}+e^{-i(j+k)\theta}}{4}\\
+& = \dfrac{e^{i(j+k)\theta}+e^{-i(j+k)\theta}}{4}+\dfrac{e^{i(-j+k)\theta}+e^{-i(-j+k)\theta}}{4}\\
+& = \frac{1}{2}\cos((j+k)\theta)+\frac{1}{2}\cos((-j+k)\theta)
+\end{split}
+\end{equation*}
+Por ende, cuando hacemos el producto de $\varphi\eta$, como cada término de la multiplicación es de la forma $a_{i}c_{j}\cos(i\theta)\cos(j\theta)$, $a_{i}d_{j}\cos(i\theta)\sen(j\theta)$, $b_{i}c_{j}\sen(i\theta)\cos(j\theta)$ ó $b_{i}d_{j}\sen(i\theta)\sen(j\theta)$ con $i\in\{1,\cdots,n\},j\in\{1,\cdots,m\}$ y donde ya vimos que dichos productos se quedan en $A$, entonces la suma y multiplicación por escalares también.\\
+$\therefore \varphi\eta\in A$.
+
+\item Claramente $\varphi(\cos(\theta),\sen(\theta))=1\in A$
+
+\item Sean $x_{1},x_{2}\in\s^{1}$, $x_{1}\neq x_{2}$\\
+ Queremos ver que $\exists\zeta\in A$ tal que $\zeta(x_{1})\neq\zeta(x_{2})$\\
+Primero, consideremos 
+\begin{center}
+$\beta(\cos(\theta),\sen(\theta))=\cos(\theta)+\sen(\theta)$ y\\
+$\gamma(\cos(\theta),\sen(\theta))=\cos(\theta)-\sen(\theta)$
+\end{center}
+Donde claramente $\beta,\gamma\in A$, veamos que para $x_{1}$ y $x_{2}$ la imagen de estos puntos es distinta bajo alguna de estas dos funciones.\\
+Como $x_{1}\in\s^{1}\Rightarrow\exists\theta_{1}\in[0,2\pi)$ tal que $x_{1}=(\cos(\theta_{1}),\sen(\theta_{2}))$, análogamente como $x_{2}\in\s^{1}\Rightarrow\exists\theta_{2}\in[0,2\pi)$ tal que $x_{2}=(\cos(\theta_{2}),\sen(\theta_{2}))$.\\
+Por otra parte, dados $\theta,\varphi\in[0,2\pi)$, si $\beta(\cos(\theta),\sen(\theta))=\beta(\cos(\varphi),\sen(\varphi))$ y además $\gamma(\cos(\theta),\sen(\theta))=\gamma(\cos(\varphi),\sen(\varphi))$, tenemos lo siguiente
+\begin{gather}
+\cos(\theta)+\sen(\theta)=\cos(\varphi)+\sen(\varphi)\\
+\cos(\theta)-\sen(\theta)=\cos(\varphi)-\sen(\varphi)
+\end{gather}
+De $(2)$, tenemos que 
+\begin{center}
+$\cos(\theta)=\cos(\varphi)-\sen(\varphi)+\sen(\theta)$
+\end{center} 
+Y sustituyendo en $(1)$ se sigue que
+\begin{center}
+$\cos(\varphi)-\sen(\varphi)+\sen(\theta)+\sen(\theta)=\cos(\varphi)+\sen(\varphi)$\\
+$\Rightarrow 2\sen(\theta)=2\sen(\varphi)\Rightarrow\sen(\theta)=\sen(\varphi)$
+\end{center}
+Ahora sustituyendo esto en $(2)$
+\begin{center}
+$\cos(\theta)-\sen(\varphi)=\cos(\varphi)-\sen(\varphi)$\\
+$\Rightarrow \cos(\theta)=\cos(\varphi)$
+\end{center}
+Ahora, como $x_{1}\neq x_{2}$, tenemos que $(\cos(\theta_{1}),\sen(\theta_{1}))\neq(\cos(\theta_{2}),\sen(\theta_{2}))$, de esto se sigue que $\cos(\theta_{1})\neq\cos(\theta_{2})$ ó $\sen(\theta_{1})\neq\sen(\theta_{2})$, con esto último, concluimos que $x_{1}$ y $x_{2}$ no pueden dar al mismo punto bajo $\beta$ y $\gamma$, por lo que dependiendo el caso, $\zeta=\beta$ ó $\zeta=\gamma$, por lo que $\zeta(x_{1})\neq\zeta(x_{2})$ y $\zeta\in A$ 
+\end{enumerate} 
+Por ende, de los incisos $a),b),c)$ y $d)$, concluimos que $A$ es denso en $\cC^{0}(\s^{1})$ (ya que tenemos las hipótesis del Teorema de Stone-Weierstrass), así, dada una función continua $f:\s^{1}\longrightarrow {\R}$, existe una sucesión $(\varphi_{k})$ de funciones en $A$ que converge uniformemente a $f$ en $\s^{1}$
+\end{proof}
+\end{spacing}
+
+\item Sean $V,W,Z$ espacios de Banach. Demuestra las siguientes dos afirmaciones.
+  \begin{enumerate}
+  \item[$(a)$] Si $S\in\cL(V,W)$ y $T\in\cL(W,Z)$ entonces
+    \begin{equation*}
+      \|T\circ S\|_{\cL(V,Z)}\leq \|T\|_{\cL(W,Z)}\|S\|_{\cL(V,W)}.
+    \end{equation*}
+    \begin{spacing}{1.7}
+    \begin{proof}
+    Sean $S\in\cL(V,W)$, $T\in\cL(W,Z)$.\\
+    Claramente tenemos que se cumplen las siguientes desigualdades
+    \begin{center}
+    $\norm{T(a)}_{Z}\leq\norm{T}_{\cL(W,Z)}\norm{a}_{W}\quad\forall a\in W\quad\forall T\in\cL(W,Z)\cdots(1)$  \\
+    $\norm{S(b)}_{W}\leq\norm{S}_{\cL(V,W)}\norm{b}_{V}\quad\forall b\in V\quad\forall S\in\cL(V,W)\cdots(2)$
+    \end{center}
+    Sea $v\in V$\\
+    Por las desigualdades $(1)$ y $(2)$, se tiene que 
+    \begin{center}
+    $\norm{T(S(v))}_{Z}\leq\norm{T}_{\cL(W,Z)}\norm{S(v)}_{W}\leq\norm{T}_{\cL(W,Z)}\norm{S}_{\cL(V,W)}\norm{v}_{V}$
+    \end{center}
+    $\therefore\norm{T(S(v))}_{Z}\leq\norm{T}_{\cL(W,Z)}\norm{S}_{\cL(V,W)}\norm{v}_{V}\quad\forall v\in V$.\\
+    Además, si $v\neq 0_{V}$, se tiene que 
+    \begin{center}
+    $\dfrac{\norm{T\circ S(v)}_{Z}}{\norm{v}_{V}}\leq\norm{T}_{\cL(W,Z)}\norm{S}_{\cL(V,W)}\quad\forall v\in V, v\neq 0_{V}$
+    \end{center}
+    De esto último, tenemos que 
+    \begin{center}
+    $\displaystyle\norm{T\circ S}_{\cL(V,Z)}=\sup_{v\in V, v\neq 0}\dfrac{\norm{T\circ S(v)}_{Z}}{\norm{v}_{V}}\leq\norm{T}_{\cL(W,Z)}\norm{S}_{\cL(V,W)}$
+    \end{center}
+    \end{proof}
+    \end{spacing}
+  \item[$(b)$] Si $S_k\to S$ en $\cL(V,W)$ y $T_k\to T$ en $\cL(W,Z)$, entonces $T_k\circ S_k\to T\circ S$ en $\cL(V,Z)$.
+  \begin{spacing}{1.5}
+  \begin{proof}
+  Sea $\varepsilon>0$\\
+  Como $S_{k}\longrightarrow S$, entonces $\exists N_{1}\in{\N}$ tal que $\forall k\in{\N}$, si $k\geq N_{1}\Rightarrow\norm{S_{k}-S}_{\cL(V,W)}<\varepsilon_{1}$.\\
+  Como $T_{j}\longrightarrow T$, entonces $\exists N_{2}\in{\N}$ tal que $\forall j\in{\N}$, si $j\geq N_{2}\Rightarrow\norm{T_{j}-T}_{\cL(W,Z)}<\varepsilon_{2}$.\\
+  Donde $\varepsilon_{1}=\dfrac{\varepsilon}{2\norm{T}_{\cL(W,Z)}}$ y $\varepsilon_{2}=\dfrac{\varepsilon}{2\norm{S_{n}}_{\cL(V,W)}}$.\\
+  Notemos que, como $S_{n}\longrightarrow S$, entonces $S_{n}$ está acotada y por ende $\norm{S_{n}}_{\cL(V,W)}<\infty$, por lo que tiene sentido como definimos $\varepsilon_{2}$.\\
+  Y de las desigualdades del inicio, se tiene que 
+  \begin{center}
+  $\norm{S_{k}(v)-S(v)}_{W}<\varepsilon_{1}\norm{v}_{V}\quad\forall k\geq N_{1}\quad\forall v\in V\cdots(1)$\\
+  $\norm{T_{j}(w)-T(w)}_{Z}<\varepsilon_{2}\norm{w}_{W}\quad\forall j\geq N_{2}\quad\forall w\in W\cdots(2)$
+  \end{center}
+  Sean $N=\max\{N_{1},N_{2}\}$, $n\in{\N}$ tal que $n\geq N$ y sea $v\in V$\\
+  Queremos ver que $\norm{T_{n}\circ S_{n}(v)-T\circ S(v)}_{Z}<\varepsilon\norm{v}_{V}$.\\
+  $\norm{T_{n}\circ S_{n}(v)-T\circ S(v)}_{Z}\leq\norm{T_{n}\circ S_{n}(v)-T\circ S_{n}(v)}_{Z}+\norm{T\circ S_{n}(v)-T\circ S(v)}_{Z}$.\\
+  Como $S_{n}\in{\N}\quad\forall n\in{\N}$ y además $n\geq N\geq N_{2}$, tenemos que 
+  \begin{center}
+  $\norm{T_{n}\circ S_{n}(v)-T\circ S_{n}(v)}_{Z}<\varepsilon_{2}\norm{S_{n}(v)}_{W}\leq\varepsilon_{2}\norm{S_{n}}_{\cL(V,W)}\norm{v}_{V}$
+  \end{center}   
+  La última desigualdad se desprende de lo mencionado al inicio del inciso $a)$.\\
+  Por otra parte, como $n\geq N\geq N_{1}$, tenemos que
+  \begin{center}
+  $\norm{T\circ S_{n}(v)-T\circ S(v)}_{Z}\leq\norm{T}_{\cL(W,Z)}\norm{S_{n}(v)-S(v)}_{W}<\varepsilon_{1}\norm{T}_{\cL(W,Z)}\norm{v}_{V}$
+  \end{center}
+  Por lo que finalmente tenemos que $\forall n\geq N$
+  %\end{spacing}
+  \begin{equation*}
+  \begin{split}
+  \norm{T_{n}\circ S_{n}(v)-T\circ S(v)}_{Z} & <\varepsilon_{2}\norm{S_{n}}_{\cL(V,W)}\norm{v}_{V}+\varepsilon_{1}\norm{T}_{\cL(W,Z)}\norm{v}_{V} \\
+  & = \dfrac{\varepsilon\norm{v}_{V}}{2}+\dfrac{\varepsilon\norm{v}_{V}}{2}=\norm{v}_{V}\varepsilon
+  \end{split}
+  \end{equation*}
+Así $\norm{T_{n}\circ S_{n}(v)-T\circ S(v)}_{Z}<\varepsilon\norm{v}_{V}\quad\forall v\in V$\\
+$\therefore T_{n}\circ S_{n}\longrightarrow T\circ S$    
+  \end{proof}
+  \end{spacing}
+    \end{enumerate}
+
+\end{enumerate}
+  
+\end{document}
