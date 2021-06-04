@@ -1,0 +1,452 @@
+\documentclass[10pt,a4paper]{article}
+
+% Idioma y unicode para acentos
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish,mexico]{babel}
+
+% Para mejores márgenes
+\usepackage{geometry}
+\usepackage{fancyhdr} %este lo puse yo
+\usepackage{setspace}
+
+% Paquetes estándar de matemáticas
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % para la familia \mathscr
+
+% Teoremas 
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposición}
+\newtheorem{lem}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definición}
+\newtheorem{pre}{Pregunta}
+
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+% Respuesta
+\newenvironment{prueba}{\renewcommand{\proofname}{Prueba}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+\newenvironment{solucion}{\renewcommand{\proofname}{Solución}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+
+% Enumeración
+\usepackage{enumitem}
+
+% Tablas bonitas
+\usepackage{booktabs}
+
+% Diagramas
+\usepackage{tikz-cd}
+
+% Verbatim
+\usepackage{fancyvrb}
+
+% Color y Links
+\usepackage{xcolor}
+\definecolor{mine}{RGB}{0.3,0,0}
+\usepackage{hyperref}
+\hypersetup{final,hidelinks, colorlinks, linkcolor = mine, citecolor = mine,
+  urlcolor = mine}
+
+%% Valor absoluto y norma
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Conjuntos de números
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+
+\def\r{\mathbb{R}}
+\def\rn{\mathbb{R}^n}
+\def\z{\mathbb{Z}}
+\def\n{\mathbb{N}}
+\def\s{\mathbb{S}}
+\def\eps{\varepsilon}
+\def\o{\Omega}
+\def\vp{\varphi}
+\def\rh{\rightharpoonup}
+\def\io{\int_{\Omega}}
+\def\irn{\int_{\r^n}}
+\def\d{\mathrm{d}}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cS{\mathcal{S}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\sin{\mathrm{sen}}
+\def\id{\mathrm{id}}
+
+\begin{document}
+
+\title{Tarea 14}
+\date{\today}
+\author{Ricardo Cruz Martínez}
+\maketitle
+\begin{enumerate}
+
+\item 
+\begin{enumerate}
+\item Prueba que el \emph{toro de Clifford} 
+\begin{equation*}
+\mathbb{T}^n:=\{x=(x_1,\ldots,x_{2n})\in \r^{2n}:x_1^2+x_2^2=\cdots=x_{2n-1}^2+x_{2n}^2=1\}
+\end{equation*}
+es una subvariedad de $\r^{2n}$ de clase $\cC^\infty$. ¿Cuál es su codimensión? 
+\begin{prueba}
+Hacemos $\Omega=\r^{2n}$ y proponemos
+\begin{center}
+$\vp:\Omega\longrightarrow\rn$, dada por\\
+$\vp(x_{1},...,x_{2n})=(x_{1}^{2}+x_{2}^{2},...,x_{2n-1}^{2}+x_{2n}^{2})$
+\end{center}
+Donde $\vp$ es diferenciable entrada a entrada y es fácil notar que 
+\begin{center}
+$\vp'(x)=
+\begin{pmatrix}
+\nabla(x_{1}^{2}+x_{2}^{2})\\
+\vdots\\
+\nabla(x_{2n-1}^{2}+x_{2n}^{2})
+\end{pmatrix}
+=
+\begin{pmatrix}
+2x_{1} & 2x_{2} & 0 & \cdots & 0\\
+\vdots & & \ddots & &   \vdots\\
+0 & 0 & \cdots & 2x_{2n-1} & 2x_{2n}
+\end{pmatrix}
+$
+\end{center}
+Y sabemos que $\vp'(x)$ es lineal y por lo que vimos antes, es diferenciable y su derivada es ella misma, así $\vp''(x)[y]=\vp'(x)$ y como la segunda derivada ya es constante en el espacio $\cL_{3}(\r^{2n},\rn)$, tenemos que su tercer derivada es nula, por lo que $\vp$ es de clase $\cC^{\infty}$.\\
+Claramente $\Omega$ es abierto en $\r^{2n}$ y de igual manera, $\mathbb{T}\subseteq\Omega$.
+Por otra parte, veamos que $\overline{1}=(1,...,1)\in\rn$ es valor regular de $\vp$. Antes, notemos que tenemos la siguiente igualdad entre conjuntos
+\begin{center}
+$\mathbb{T}^{n}=\{x\in \r^{2n}:x_1^2+x_2^2=\cdots=x_{2n-1}^2+x_{2n}^2=1\}=\{x\in\r^{2n}:\vp(x)=\overline{1}\}$
+\end{center}
+Sean $x=(x_{1},...,x_{2n})\in\mathbb{T}^{n}$, $v=(v_{1},...,v_{n})\in\rn$\\
+Queremos ver que existe $y=(y_{1},...,y_{2n})\in\r^{2n}$ tal que $\vp'(x)[y]=v$\\
+Sabemos que
+\begin{equation*}
+\begin{split}
+\vp'(x)[y] & = \begin{pmatrix}
+2x_{1} & 2x_{2} & 0 & \cdots & 0\\
+\vdots & & \ddots & &   \vdots\\
+0 & 0 & \cdots & 2x_{2n-1} & 2x_{2n}
+\end{pmatrix}
+\begin{pmatrix}
+y_{1}\\
+\vdots\\
+y_{2n}
+\end{pmatrix}\\
+& = 2(x_{1}y_{1}+x_{2}y_{2},...,x_{2n-1}y_{2n-1}+x_{2n}y_{2n})
+\end{split}
+\end{equation*}
+Si hacemos $y$ tal que $y_{2i}=\dfrac{v_{i}x_{2i}}{2}$ y $y_{2i-1}=\dfrac{v_{i}x_{2i-1}}{2}$, con $i\in\{1,...,n\}$ se tiene
+\begin{equation*}
+\begin{split}
+\vp'(x)[y] & = 2(x_{1}y_{1}+x_{2}y_{2},...,x_{2n-1}y_{2n-1}+x_{2n}y_{2n})\\
+& = 2\left(\frac{x_{1}v_{1}x_{1}}{2}+\frac{x_{2}v_{1}x_{2}}{2},...,\frac{x_{2n-1}v_{n}x_{2n-1}}{2}+\frac{x_{2n}v_{n}x_{2n}}{2}\right)\\
+& = (v_{1}(x_{1}^{2}+x_{2}^{2}),...,v_{n}(x_{2n-1}^{2}+x_{2n}^{2}))\\
+& = (v_{1},v_{2},...,v_{n})=v
+\end{split}
+\end{equation*}
+Por lo tanto, $\vp'(x)$ es sobreyectiva en $\mathbb{T}^{n}$ y por ende, $\overline{1}$ es valor regular de $\vp$.\\
+Finalmente, concluimos que $\mathbb{T}^{n}$ es una subvariedad de $\r^{2n}$ de clase $\cC^{\infty}$ de codimensión n, pues es la dimensión del codominio de $\vp$. 
+\end{prueba}
+\item Dado $x\in\mathbb{T}^{n}$, describe el espacio tangente $T_{x}\mathbb{T}^{n}$ en $x$ al toro de Clifford.
+\begin{solucion}
+Por definición sabemos que 
+\begin{center}
+$T_{x}\mathbb{T}^{n}=Ker(\vp'(x))=\{y\in\r^{2n}:\vp'(x)[y]=\overline{0}\}$
+\end{center}
+Así, tenemos que se cumple lo siguiente 
+\begin{equation*}
+\begin{split}
+y\in Ker(\vp'(x))& \Leftrightarrow \vp'(x)[y]=\overline{0}\\ & \Leftrightarrow 2(x_{1}y_{1}+x_{2}y_{2},...,x_{2n-1}y_{2n-1}+x_{2n}y_{2n})=\overline{0}\\
+& \Leftrightarrow (x_{1}y_{1}+x_{2}y_{2},...,x_{2n-1}y_{2n-1}+x_{2n}y_{2n})=\overline{0}\\
+& \Leftrightarrow x_{1}y_{1}+x_{2}y_{2}=0,...,x_{2n-1}y_{2n-1}+x_{n}y_{n}=0
+\end{split}
+\end{equation*}
+\end{solucion}
+\end{enumerate}
+  
+\item Sean $\Sigma:=\{\bar x=(x_k)\in\ell_2:\|\bar x\|_{\ell_2}=1\}$ la esfera unitaria en $\ell_2$ y $g:\ell_2\to\r$ la función dada por $g(\bar x)=x_1$.
+\begin{enumerate}
+\item Prueba que $\Sigma$ es una subvariedad de $\ell_2$ de clase $\cC^\infty$. ¿Cuál es su codimensión? 
+\begin{prueba}
+Definimos la siguiente función
+\begin{center}
+$\vp:\Omega\longrightarrow\r$\\
+$\vp(x)=\displaystyle\sum_{k=1}^{\infty}x_{k}^{2}=\norm{x}_{\ell_2}^{2}$
+\end{center}
+Donde $\Omega=\ell_2$, que claramente es abierto.\\
+En clase vimos que 
+\begin{equation*}
+\vp'(x)[y]=2\sum_{k=1}^{\infty}x_{k}y_{k}
+\end{equation*}
+que claramente es lineal, y como la derivada de una función lineal es ella misma, se tiene que $D^{2}_{\vp}(x)=\vp'(x)[y]$ y como $\vp'(x)[y]$ es constante en $\cL_{2}(\ell_2,\r)$, así $D_{\vp}^{3}\equiv 0$ y de esto $\vp$ es de clase $\cC^{\infty}$.\\
+Por otra parte, notemos que 
+\begin{equation*}
+\Sigma=\{v\in\ell_2:\norm{v}_{\ell_2}=1\}=\{v\in\ell_2:\norm{v}_{\ell_2}^{2}=1\}=\{v\in\ell_2:\vp(v)=1\}
+\end{equation*}
+Además se cumple que $\Sigma\subseteq\Omega=\ell_2$\\
+Veamos que $1$ es valor regular de $\vp$.\\
+Sea $x\in\Sigma$
+\begin{equation*}
+\vp'(x)[x]=2\sum_{k=1}^{\infty}x_{k}^{2}=2\norm{x}_{\ell_2}^{2}>0
+\end{equation*}
+La última desigualdad se da a raíz de que $\norm{x}_{\ell_2}^{2}=1>0$, ahora, como $\vp'(x)$ es una transformación lineal con codominio $\r$, donde sabemos que $dim(\r)=1$ y como la imágen de $\vp'(x)$ es un subespacio vectorial de $\r$, entonces hay dos posibilidades, ó $Im(\vp'(x))=\{0\}$ ó $Im(\vp'(x))=\r$, pero ya vimos que $\vp'(x)(x)\neq 0$, por lo que $Im(\vp'(x))=\r$ y por ende $\vp'(x)$ es sobreyectiva, por lo que $1$ es valor regular de $\vp$.\\
+Finalmente, concluimos que $\Sigma$ es una subvariedad de $\ell_2$ de clase $\cC^{\infty}$ de codimensión 1, pues es la dimensión del codominio de $\vp$. 
+\end{prueba}
+
+\item Encuentra todos los puntos críticos de $g$ en $\Sigma$, y di si algunos de ellos son máximos o mínimos locales de $g$ en $\Sigma$.
+\end{enumerate}
+\begin{solucion}
+Buscamos los puntos $u\in\Sigma$ tales que $g'(u)v=0\quad\forall v\in T_{u}\Sigma$, donde 
+\begin{center}
+$T_{u}\Sigma=Ker\vp'(u)=\{v\in\ell_2:\vp'(u)v=0\}$
+\end{center}  
+Ahora, es fácil ver que $g$ es lineal y continua, por lo que $g'(u)=g$, pues la derivada de una función lineal es ella misma.\\
+Por otra parte, sea $u\in\Sigma$ y $v\in T_{u}\Sigma$, entonces
+\begin{center}
+$g'(u)v=0\Leftrightarrow g(v)=0\Leftrightarrow v_{1}=0$
+\end{center}
+Por lo que los puntos críticos $u\in\Sigma$ que buscamos son aquellos que cumplen que 
+\begin{center}
+$Ker\vp'(u)\subseteq A:=\{w\in\ell_2:w_{1}=0\}$
+\end{center}
+Sea $u=(u_{1},u_{2},...)\in\Sigma$ con $u_{i}\neq 0$ para alguna $i>1$, por lo que tenemos dos casos
+\begin{enumerate}
+\item[Caso 1.-] $u_{1}=0$\\
+Consideremos $x\in\ell_2$ tal que $x=(1,0,0,...)$, donde claramente se cumple que 
+\begin{equation*}
+\vp'(u)[x]=2\sum_{k=1}^{\infty}u_{k}x_{k}=0
+\end{equation*}
+Sin embargo $x\notin A$, por lo que si $u_{1}=0$, entonces $u$ no puede ser punto crítico de $g$.
+\item[Caso 2.-] $u_{1}\neq 0$\\
+Ahora consideremos $x\in\ell_2$, donde $x_{1}=1$ , $x_{i}=\frac{-u_{1}}{u_{i}}$ y $x_{j}=0$ para toda $j\neq i$, por lo que tenemos lo siguiente
+\begin{center}
+$\vp'(u)[x]=2\displaystyle\sum_{k=1}^{\infty}u_{k}x_{k}=u_{1}-\frac{u_{1}u_{i}}{u_{i}}=0$
+\end{center}
+Por lo que $x\in Ker(\vp'(u))$, pero $x\notin A$, por lo que si $u$ tiene esa forma, tampoco puede ser punto crítico de $g$
+\end{enumerate}
+Por lo que únicamente $u=(\pm 1,0,0,...)$, donde claramente $u\in\Sigma$. Veamos que, en efecto, son puntos críticos de $g$\\
+Tomemos $u=(1,0,0,...)$ y $x\in T_{u}\Sigma$\\
+\begin{center}
+$\vp'(u)[x]=0\Leftrightarrow 2\displaystyle\sum_{k=1}^{\infty}u_{k}x_{k}=0\Leftrightarrow x_{1}=0$
+\end{center}
+Por lo que tenemos que $x\in A$ además de que $u$ es, en efecto, un punto crítico de $g$ y de manera análoga se sigue que $u=(-1,0,0,...)$ es también un punto crítico de $g$.\\
+Ahora veamos cual de ellos es máximo o mínimo local de $g$ en $T$.\\
+Dado $u\in\Sigma$, se tiene que $g(u)\in[-1,1]$, pues $u_{1}^{2}\leq\norm{u}_{\ell_2}^{2}=1$, por lo que ya tenemos las desigualdades deseadas, pues $-1=g(u_{1})\leq g(u)\leq g(u_{2})=1\quad\forall u\in\Sigma$, donde $u_{1}=(-1,0,0,...)$ y $u_{2}=(1,0,0,...)$, por lo que $u_{1}$ es mínimo de $g$ en $\Sigma$ y $u_{2}$ es máximo de $g$ en $\Sigma$.
+\end{solucion}
+  
+\item Sea $\cT$ el \emph{toro de revolución} en $\r^3$ que se obtiene al rotar el círculo
+  \begin{equation*}
+  \cS=\{(x,y,0)\in\r^3:(x-a)^2+y^2=r^2\},\qquad 0<r<a,
+  \end{equation*}
+alrededor del eje $y$.
+  \begin{enumerate}
+  \item Prueba que $\cT$ es una subvariedad de $\r^3$ de clase $\cC^\infty$. ¿Cuál es su codimensión? 
+  \begin{prueba}
+  consideremos la siguiente función
+  \begin{center}
+  $\vp:\Omega=\r^{3}\setminus\{Eje Y\}\longrightarrow\r$, dada por\\
+  $\vp(x,y,z)=(\sqrt{x^{2}+z^{2}}-a)^{2}+y^{2}-r^{2}$
+  \end{center}
+  Donde claramente $\vp$ es de clase $\cC^{\infty}$ al ser composición de funciones de clase $\cC^{\infty}$, además $\Omega$ es abierto en $\r^{3}$, pues como $\r^{3}$ es un espacio normado y el Eje Y es un subespacio de $\r^{3}$ de dimensión finita, por el ejercicio $5.38$ que probamos en la tarea 5, el Eje Y es cerrado en $\r^{3}$, por lo que su complemento $\r^{3}\setminus\{Eje Y\}$ es abierto.\\
+  Por otra parte, de cálculo 3 sabemos que 
+  \begin{equation*}
+  T=\{(x,y,z)\in\r^{3}:\vp(x,y,z)=0\}
+\end{equation*}   
+Además se tiene que $T\subseteq\Omega$, ya que por como de definió el sólido, nunca vamos a tocar el Eje Y.\\
+Afirmamos que $0$ es valor regular de $\vp$, para esto, tenemos lo siguiente, dado $x\in T$,$x=(x,y,x)$, $z=(a,b,c)$
+\begin{equation*}
+\begin{split}
+\vp'(x)[z] & =\nabla\vp(x)\cdot z\\
+& = \left(\frac{2xa(\sqrt{x^{2}+z^{2}}-a)}{\sqrt{x^{2}+z^{2}}},2yb,\frac{2zc(\sqrt{x^{2}+z^{2}}-a)}{\sqrt{x^{2}+z^{2}}}\right)
+\end{split}
+\end{equation*} 
+Por otra parte, sabemos por propiedades del producto punto que dado $\lambda\in\r$ siempre existen $u,v\in\r^{3}$ tales que $u\cdot v=\lambda$ con $u\neq\overline{0}$ (pues si $u=(u_{1},u_{2},u_{3})$, basta tomar $v=(\frac{\lambda}{u_{1}},\frac{\lambda}{u_{2}},\frac{\lambda}{u_{3}})$).\\
+Además, claramente $x\neq\overline{0}$, pues $\overline{0}\notin T$, por lo que $\vp'(x)$ no es la transformación que manda todo al cero, así, por lo mencionado antes $\exists z\in\r^{3}$ tal que $\vp'(x)[z]=\lambda$, con lo que concluimos que $\vp'(x)$ es sobreyectiva y por ende $0$ es valor regular de $\vp$.\\
+finalmente concluimos que $T$ es una subvariedad de $\r^{3}$ de clase $\cC^{\infty}$ de codimensión igual a $1$.
+  \end{prueba}
+  
+  \item Encuentra los puntos críticos de la función $g(x,y,z)=z$ en $\cT$, y di cuáles de ellos son máximos o
+    mínimos locales de $g$ en $\cT$.
+    \begin{solucion}
+    Supongamos que $\overline{x}=(x,y,z)\in \cT$ es un punto crítico de $g$ en $\cT$, así, por el \textit{Teorema de los Multiplicadores de Lagrange}, tenemos que $\exists\lambda\in\r$ tal que 
+    \begin{equation*}
+    \nabla g(\overline{x})=\lambda\nabla\vp(\overline{x})
+    \end{equation*}
+    Por lo que nuestro problema se se resume en resolver el siguiente sistema de ecuaciones
+    \begin{eqnarray}
+    2\lambda(\sqrt{x^{2}+z^{2}}-a)\left(\dfrac{x}{\sqrt{x^{2}+z^{2}}}\right)=0\nonumber\\ 
+    2\lambda y=0\nonumber\\
+    2\lambda(\sqrt{x^{2}+z^{2}}-a)\left(\dfrac{z}{\sqrt{x^{2}+z^{2}}}\right)=1\nonumber
+    \end{eqnarray}
+    Claramente $\lambda\neq 0$, sino tendríamos de la tercer ecuación que $1=0$, lo cual es absurdo. De igual manera $\sqrt{x^{2}+z^{2}}-a\neq 0$, pues de la tercera ecuación se desprendería que $1=0$, lo cual es absurdo, por lo que nuestro sistema se reduce a lo siguiente 
+    \begin{eqnarray}
+    2\lambda\left(\dfrac{x}{\sqrt{x^{2}+z^{2}}}\right)=0\\
+    2\lambda\left(\dfrac{z}{\sqrt{x^{2}+z^{2}}}\right)=\dfrac{1}{\sqrt{x^{2}+z^{2}}-a}    
+\end{eqnarray}
+     De $(1)$ tendríamos que $x=0$, por lo que $(2)$ se vería de la siguiente manera 
+    \begin{equation}
+    2\lambda\frac{z}{\sqrt{z^{2}}}=\frac{1}{\sqrt{z^{2}}-a}
+    \end{equation}
+    Y como $\overline{x}\in\cT$, se cumple que 
+    \begin{equation*}
+    (\sqrt{x^{2}+z^{2}}-a)^{2}+y^{2}-r^{2}=0
+    \end{equation*}
+    Dado que $x=y=0$, entonces 
+    \begin{equation*}
+    (\sqrt{z^{2}}-a)^{2}=r^{2}
+    \end{equation*}
+    Por lo que $(3)$ se ve de la siguiente manera (notamos que $z\neq 0$ para que tenga sentido que $\overline{x}\in\cT$ y usando el hecho que $r>0$)
+    \begin{equation*}
+    \frac{4\lambda^{2}z^{2}}{z^{2}}=\frac{1}{(\sqrt{z^{2}}-a)^{2}}\Rightarrow 4\lambda^{2}=\frac{1}{r^{2}}\Rightarrow\lambda=\pm\frac{1}{2r}
+    \end{equation*}
+    \begin{itemize}
+    \item[Caso 1.-] $\lambda=\dfrac{1}{2r}$\\
+    Sustituyendo en $(3)$, tenemos que 
+    \begin{equation*}
+    \frac{1}{\abs{z}-a}=\dfrac{z}{r\abs{z}}
+    \end{equation*}
+    \begin{enumerate}
+    \item[Subcaso 1.1.-] $z>0$\\
+    Tendríamos que 
+    \begin{equation*}
+    \frac{1}{z-a}=\frac{1}{r}\Rightarrow z-a=r\Rightarrow z=r+a
+    \end{equation*}
+    \item[Subcaso 1.2.-] $z<0$\\
+    \begin{equation*}
+    \frac{1}{-z-a}=\frac{-1}{r}\Rightarrow z+a=r\Rightarrow z=r-a
+    \end{equation*}
+    \end{enumerate}
+    \item[Caso 2.-] $\lambda=\dfrac{-1}{2r}$\\
+    Sustituyendo en $(3)$, tenemos que 
+    \begin{equation*}
+    \frac{1}{\abs{z}-a}=\dfrac{-z}{r\abs{z}}
+    \end{equation*}
+    \begin{enumerate}
+    \item[Subcaso 2.1.-] $z>0$\\
+    \begin{equation*}
+    \frac{1}{z-a}=\frac{-1}{r}\Rightarrow z-a=-r\Rightarrow z=-r+a
+    \end{equation*}
+    \item[Subcaso 2.2.-] $z<0$\\
+    \begin{equation*}
+    \frac{1}{-z-a}=\frac{1}{r}\Rightarrow -z-a=r\Rightarrow z+a=-r\Rightarrow z=-r-a
+    \end{equation*}
+    \end{enumerate}
+    \end{itemize}
+    Por lo que nuestros puntos críticos son 4
+    \begin{center}
+    $x_{1}=(0,0,r+a)$\\
+    $x_{2}=(0,0,r-a)$\\
+    $x_{3}=(0,0,-r+a)$\\
+    $x_{4}=(0,0,-r-a)$
+    \end{center}
+    Donde $x_{1},x_{2},x_{3},x_{4}\in\cT$, pues 
+    \begin{eqnarray*}
+    \vp(0,0,r+a)=(r+a-a)^{2}-r^{2}=r^{2}-r^{2}=0\nonumber\\
+    \vp(0,0,r-a)=(\abs{r-a}-a)^{2}-r^{2}=(-r+a-a)^{2}-r^{2}=r^{2}-r^{2}=0\\
+    \vp(0,0,-r+a)=(\abs{-r+a}-a)^{2}-r^{2}=(a-r-a)^{2}-r^{2}=r^{2}-r^{2}=0\\
+    \vp(0,0,-r-a)=(\abs{-r-a}-a)^{2}-r^{2}=(r+a-a)^{2}-r^{2}=r^{2}-r^{2}=0
+    \end{eqnarray*}
+    Ahora, como $\cT$ se ve como la curva de nivel cero de la función $\vp$, tenemos que se ve como la gráfica de una función continua, la cual, por Cálculo 3 sabemos que es cerrado, y además es acotada, por lo que $\cT$ es compacto en $\r^{3}$, y por teorema visto en clase, sabemos que una función continua con dominio compacto alcanza sus valores extremos y los candidatos a dichos valores extremos son justamente $x_{1}$ y $x_{4}$, ya que claramente se cumple que 
+    \begin{equation*}
+    g(x_{1})>g(x_{i})\quad i=2,3,4
+\end{equation*}     
+Por lo que concluimos que $x_{1}$ es el máximo de $g$ en $\cT$ y también se cumple que 
+\begin{equation*}
+g(x_{4})<g(x_{i})\quad i=1,2,3
+\end{equation*}
+Por lo que $x_{4}$ es el mínimo de $g$ en $\cT$.
+\end{solucion}
+  \end{enumerate}
+  
+\item \textbf{Teorema de la función inversa}. Sean $V,W$ espacios de Banach, $\o$ un subconjunto abierto de $V$, $\vp:\o\to W$ una función de clase $\cC^1$ en $\o$ y $v_0\in\o$. Demuestra que, si $\vp'(v_0)\in\cL(V,W)$ es un isomorfismo de Banach, entonces existen un subconjunto abierto $\o'$ de $W$ y un subconjunto abierto $\o''$ de $V$ tales que \ $v_0\in\o''\subset\o$, \ $\vp(\o'')=\o'$ \ y la función
+$$\vp\mid_{\o''}:\o''\to\o'$$
+es un homeomorfismo cuyo inverso $\psi:=(\vp\mid_{\o''})^{-1}:\o'\to\o''$ es de clase $\cC^1$ en $\o'$ y satisface
+$$\psi'(\vp(v_0))=\left(\vp'(v_0)\right)^{-1}.$$
+(\emph{Sugerencia}: Aplica el teorema de la función implícita a la función $\theta:W\times\o\to W$, $\theta(w,v):=\vp(v)-w$.)  
+\begin{proof}
+Sean $(w_{0},v_{0})\in W\times\Omega$ tales que $\theta(w_{0},v_{0})=0_{W}$, además $W$ es abierto en $W$ y $\Omega$ es abierto en $V$ por hipótesis.\\
+Como $\partial_{2}\theta(w_{0},v_{0})=\vp'(v_{0})$ (al final veremos las respectivas derivadas parciales de $\theta$) y $\vp'(v_{0})$ es un isomorfismo de Banach, entonces tenemos las hipótesis del \textit{Teorema de la Función Implícita}, el cual nos asegura que $\exists\delta,\eta>0$ tales que $B_{W}(w_{0},\delta)\times B_{V}(v_{0},\eta)\subseteq W\times\Omega$.\\
+Además existe 
+\begin{center}
+$\psi:B_{W}(w_{0},\delta)\longrightarrow V$
+\end{center}
+Donde $\psi(w)\in B_{V}(v_{0},\eta)\quad\forall w\in B_{W}(w_{0},\delta)$, $\psi$ es de clase $\cC^{1}$, $\partial_{1}\theta(w,\psi(w))$ es isomorfismo de Banach y $\theta(w,\psi(w))=0\quad\forall w\in B_{W}(w_{0},\delta)$.\\
+De esto último, si $\theta(w,\psi(w))=0$, entonces $\vp(\psi(w))-w=0$ y por ende $\vp(\psi(w))=w$, así tenemos que $\vp$ es inversa izquierda de $\psi$ y por álgebra superior, tenemos que $\psi$ es inyectiva en $B_{W}(w_{0},\delta)$.\\
+Consideremos 
+\begin{center}
+$\psi:B_{W}(w_{0},\delta)\longrightarrow\psi(B_{W}(w_{0},\delta))\subseteq B_{V}(v_{0},\eta)$
+\end{center}
+Donde la última contención se da porque justo habíamos visto que $\psi(w)\in B_{V}(v_{0},\eta)\quad\forall w\in B_{W}(w_{0},\delta)$, y ademas $v_{0}\in\psi(B_{W}(w_{0},\delta))$, pues $\psi(w_{0})=v_{0}$.\\
+Con esto, tenemos que $\psi$ es inyectiva y sobreyectiva si tomamos la restricción del codominio que hicimos antes, así $\psi$ es biyectiva y por ende tiene inversa, además, por unicidad, dicha inversa va a coincidir con $\vp$.\\
+De modo que si tomamos $\Omega'=B_{W}(w_{0},\delta)\subseteq W$ que claramente es abierto en $W$ y hacemos $\Omega''=\psi(B_{W}(w_{0},\delta))\subseteq\Omega$ que también es abierto en $V$, ya que $\psi$ es continua con inversa continua y sabemos que las funciones continuas regresan abiertos en abiertos, tenemos que 
+\begin{center}
+$\psi(B_{W}(w_{0},\delta))=\vp^{-1}(B_{W}(w_{0},\delta))$
+\end{center}
+Por lo que claramente $\Omega''$ es abierto en $V$.\\
+Finalmente, para que la composición tenga sentido, podemos reescribir los dominios y codominios de la siguiente manera
+\begin{center}
+$\psi:\Omega'\longrightarrow\Omega''$ y por ende $\vp:\Omega''\longrightarrow\Omega'$
+\end{center}
+Y claramente se cumple que $\vp(\Omega'')=\Omega'$\\
+Finalmente,veamos quienes son las derivadas parciales de $\theta$, donde sabemos que 
+\begin{equation*}
+\partial_{i}\theta(w_{0},v_{0})=\theta'(w_{0},v_{0})\circ \iota_{i}\quad i\in\{1,2\}
+\end{equation*}
+Tenemos que se cumple lo siguiente, dados $(h,k)\in W\times\Omega$
+\begin{equation*}
+\begin{split}
+\theta((w_{0},v_{0})+(h,k))-\theta(w_{0},v_{0}) & = \theta((w_{0}+h,v_{0}+k))-\theta(w_{0},v_{0})\\
+& = \vp(v_{0}+k)-(w_{0}+h)-\vp(v_{0})+w_{0}
+\end{split}
+\end{equation*}
+Por lo que proponemos $\theta'(w_{0},v_{0})=\vp'(v_{0})-Id_{w}$, donde $\vp'(w_{0},v_{0})[h,k]=\vp'(v_{0})k-h$, así tenemos que
+\begin{center}
+$\displaystyle\lim_{h,k\rightarrow(0,0)}\frac{\norm{\theta((w_{0},v_{0})+(h,k))-\theta(w_{0},v_{0})-\vp'(v_{0})k+h}_{W}}{\norm{(h,k)}_{W\times V}}$\\
+$=\displaystyle\lim_{h,k\rightarrow(0,0)}\frac{\norm{\vp(v_{0}+k)-\vp(v_{0})-\vp'(v_{0})k-h+h}_{W}}{\norm{(h,k)}_{W\times V}}$\\
+$=\displaystyle\lim_{h,k\rightarrow(0,0)}\frac{\norm{\vp(v_{0}+k)-\vp(v_{0})-\vp'(v_{0})k}_{W}}{\norm{(h,k)}_{W\times V}}$
+\end{center}
+Si $\norm{(h,k)}_{W\times V}=\norm{h}_{W}$, entonces 
+\begin{equation*}
+\lim_{h\rightarrow 0}\frac{\norm{\vp(v_{0})-\vp(v_{0})}_{W}}{\norm{h}_{W}}=0
+\end{equation*}
+Por otra parte, si $\norm{(h,k)}_{W\times V}=\norm{k}_{V}$, entonces
+\begin{equation*}
+\lim_{k\rightarrow 0}\frac{\norm{\vp(v_{0}+k)-\vp(v_{0})-\vp'(v_{0})k}_{W}}{\norm{k}_{V}}=0
+\end{equation*}
+Por lo que podemos concluir que $\theta'(w_{0},v_{0})=\vp'(v_{0})-Id_{W}$ y por lo que mencionamos antes, se sigue $\partial_{1}\theta(w_{0},v_{0})=-Id_{W}$ y $\partial_{2}\theta(w_{0},v_{0})=\vp'(v_{0})$.\\
+Y para concluir, por el teorema de la función implícita se cumple que
+\begin{equation*}
+\psi'(w_{0})=\frac{-1}{\vp'(v_{0})\circ -Id_{W}}=\frac{1}{\vp'(v_{0})}
+\end{equation*}
+Y como $w_{0}=\vp(v_{0})$, tenemos que
+\begin{equation*}
+\psi'(\vp(v_{0}))=\frac{1}{\vp'(v_{0})}
+\end{equation*}
+Concluyendo así la demostración y esta tarea $<3$.
+\end{proof}
+\end{enumerate}
+\end{document}
