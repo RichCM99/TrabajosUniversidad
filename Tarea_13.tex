@@ -1,0 +1,307 @@
+\documentclass[10pt,a4paper]{article}
+
+% Idioma y unicode para acentos
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish,mexico]{babel}
+
+% Para mejores márgenes
+\usepackage{geometry}
+\usepackage{fancyhdr} %este lo puse yo
+\usepackage{setspace}
+
+% Paquetes estándar de matemáticas
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % para la familia \mathscr
+
+% Teoremas 
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposición}
+\newtheorem{lem}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definición}
+\newtheorem{pre}{Pregunta}
+
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+% Respuesta
+\newenvironment{prueba}{\renewcommand{\proofname}{Prueba}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+
+% Enumeración
+\usepackage{enumitem}
+
+% Tablas bonitas
+\usepackage{booktabs}
+
+% Diagramas
+\usepackage{tikz-cd}
+
+% Verbatim
+\usepackage{fancyvrb}
+
+% Color y Links
+\usepackage{xcolor}
+\definecolor{mine}{RGB}{0.3,0,0}
+\usepackage{hyperref}
+\hypersetup{final,hidelinks, colorlinks, linkcolor = mine, citecolor = mine,
+  urlcolor = mine}
+
+%% Valor absoluto y norma
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Conjuntos de números
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+
+\def\r{\mathbb{R}}
+\def\rn{\mathbb{R}^n}
+\def\z{\mathbb{Z}}
+\def\n{\mathbb{N}}
+\def\s{\mathbb{S}}
+\def\eps{\varepsilon}
+\def\o{\Omega}
+\def\vp{\varphi}
+\def\rh{\rightharpoonup}
+\def\io{\int_{\Omega}}
+\def\irn{\int_{\r^n}}
+\def\d{\mathrm{d}}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\sin{\mathrm{sen}}
+\def\id{\mathrm{id}}
+
+\begin{document}
+
+\title{Tarea 13}
+\date{\today}
+\author{Ricardo Cruz Martínez}
+\maketitle
+
+Sean $V_1,V_2,V,W$ espacios de Banach. 
+
+\begin{enumerate}
+  
+\item Prueba que toda función $F\in\cL(V_1,V_2;W)$ es de clase $\cC^\infty$ en $V_1\times V_2$ y calcula su derivada de orden $k$ para todo $k\in\n$.
+\begin{prueba}
+Sean $u_{0},v\in V_{1}\times V_{2}$ con $u_{0}=(u_{1},u_{2}),v=(v_{1},v_{2})$.\\
+Dado que $F$ es bilineal, notemos lo siguiente:
+\begin{equation*}
+\begin{split}
+F(u_{0}+v)-F(u_{0}) & = F((u_{1}+v_{1},u_{2}+v_{2}))-F((u_{1},u_{2}))\\
+& = F((u_{1},u_{2}+v_{2}))+F((v_{1},u_{2}+v_{2}))-F((u_{1},u_{2}))\\
+& = F((u_{1},u_{2}))+F((u_{1},v_{2}))+F((v_{1},u_{2}))+F((v_{1},v_{2}))-F((u_{1},u_{2}))\\
+& = F((u_{1},v_{2}))+F((v_{1},u_{2}))+F((v_{1},v_{2}))
+\end{split}
+\end{equation*}
+Así, proponemos $F'(u_{0})[x]=F((u_{1},x_{2}))+F((x_{1},u_{2}))$, con $x=(x_{1},x_{2})$\\
+Por otra parte, notemos que 
+\begin{equation*}
+F(u_{0}+v)-F(u_{0})-F'(u_{0})[v]=F((v_{1},v_{2}))=F(v)
+\end{equation*}
+Por otra parte, como $F$ es bilineal, por \textit{Proposición 9.26}, $\exists c\in{\R}$ tal que 
+\begin{equation*}
+\dfrac{\norm{F((v_{1},v_{2}))}_{W}}{\norm{v}_{v_{1}\times V_{2}}}\leq\dfrac{c\norm{v_{1}}_{V_{1}}\norm{v_{2}}_{V_{2}}}{\norm{v}_{V_{1}\times V_{2}}}
+\end{equation*}
+Y como 
+\begin{equation*}
+\norm{v}_{V_{1}\times V_{2}}=\displaystyle\max_{v_{j}\in V_{j}\setminus\{0\}}^{j=1,2}\norm{v_{j}}_{V_{j}}
+\end{equation*}
+Claramente tenemos lo siguiente
+\begin{equation*}
+\norm{v_{1}}_{V_{1}}\norm{v_{2}}_{V_{2}}\leq\norm{v}_{V_{1}\times V_{2}}^{2}
+\end{equation*}
+Así
+\begin{equation*}
+\dfrac{\norm{F((v_{1},v_{2}))}_{W}}{\norm{v}_{v_{1}\times V_{2}}}\leq\dfrac{c\norm{v}_{V_{1}\times V_{2}}^{2}}{\norm{v}_{V_{1}\times V_{2}}}=c\norm{v}_{v_{1}\times V_{2}}
+\end{equation*}
+De esto se sigue que
+\begin{equation*}
+\displaystyle\lim_{v\rightarrow 0}\dfrac{\norm{F(u_{0}+v)-F(u_{0})-F'(u_{0})[v]}_{W}}{\norm{v}_{V_{1}\times V_{2}}}\leq\lim_{v\rightarrow 0}c\norm{v}_{V_{1}\times V_{2}}=0
+\end{equation*}
+Ahora veamos que $F'(u)[x]$ es lineal.\\
+Sean $x=(x_{1},x_{2}),y=(y_{1},y_{2})\in V_{1}\times V_{2},\lambda,\mu\in{\R}$
+\begin{equation*}
+\begin{split}
+F'(u_{0})[\lambda x+\mu y] & = F'(u_{0})[(\lambda x_{1}+\mu y_{1},\lambda x_{2}+\mu y_{2})]\\
+& = F((u_{1},\lambda x_{2}+\mu y_{2}))+F((\lambda x_{1}+\mu y_{1},u_{2}))\\
+& = \lambda F((u_{1},x_{2}))+\mu F((u_{1},y_{2}))+\lambda F((x_{1},u_{2}))+\mu F((y_{1},u_{2}))\\
+& = \lambda F((u_{1},x_{2}))+\lambda F((x_{1},u_{2}))+\mu F((u_{1},y_{2}))+\mu F((y_{1},u_{2}))\\
+& = \lambda F'(u_{0})[x]+\mu F'(u_{0})[y]
+\end{split}
+\end{equation*}
+Por lo tanto, $F'(u_{0})[x]$ es lineal, ahora veamos que es continua; para esto, veamos que es continua en $0$\\
+Sean $x=(x_{1},x_{2})\in V_{1}\times V_{2}$, $\varepsilon>0$. Como $F$ es continua y bilineal, por la \textit{Proposición 9.26}, se sigue que 
+\begin{equation*}
+\begin{split}
+\norm{F'(u_{0})[x]}_{W} & = \norm{F((u_{1},x_{2}))+F((x_{1},u_{2}))}_{W}\\
+& \leq \norm{F((u_{1},x_{2}))}_{W}+\norm{F((x_{1},u_{2}))}_{W}\\
+& \leq c\norm{u_{1}}_{V_{1}}\norm{x_{2}}_{V_{2}}+c\norm{x_{1}}_{V_{1}}\norm{u_{2}}_{V_{2}}<\varepsilon
+\end{split}
+\end{equation*} Si $\norm{x}<\min\{a,b\}$, con $a=\dfrac{\varepsilon}{2c\norm{v_{1}}_{V_{1}}}$ y $b=\dfrac{\varepsilon}{2c\norm{v_{2}}_{V_{2}}}$\\
+Ya que 
+\begin{equation*}
+\begin{split}
+c\norm{u_{1}}_{V_{1}}\norm{x_{2}}_{V_{2}}+c\norm{x_{1}}_{V_{1}}\norm{u_{2}}_{V_{2}} & \leq c\norm{u_{1}}_{V_{1}}\norm{x}_{V_{1}\times V_{2}}+c\norm{v_{2}}_{V_{2}}\norm{x}_{V_{1}\times V_{2}}\\
+& <c\norm{v_{1}}_{V_{1}}a+c\norm{v_{2}}_{V_{2}}b=\varepsilon
+\end{split}
+\end{equation*}
+Por lo tanto, concluimos que $F'(u_{0})[x]$ es continua en todo su dominio.\\
+Ahora, como $u_{0}$ fue arbitraria, concluimos que $F$ es diferenciable en todo $V_{1}\times V_{2}$.\\
+Afirmamos que $D_{F}^{2}(u):V_{1}\times V_{2}\longrightarrow\cL V_{2}(V_{1},V_{2};W)$ está dada por $D_{F}^{2}(u)[x]=D_{F}(u)=F'(u)$, observamos que $F'(u)\in\cL(V_{1},V_{1};W)$, así sean $u,v\in V_{1}\times V_{2}$
+\begin{equation*}
+\displaystyle\lim_{v\rightarrow 0}\dfrac{\norm{F'(u+v)-F'(u)-F'(v)}_{\cL(v_{1},V_{2};W)}}{\norm{v}_{V_{1}\times V_{2}}}=\lim_{v\rightarrow 0}\dfrac{\norm{0}_{\cL(V_{1},V_{2};W)}}{\norm{v}_{V_{1}\times V_{2}}}=0
+\end{equation*}
+Y como $u$ fue arbitraria, $F'$ es diferenciable en $V_{1}\times V_{2}$ y su derivada es $F'$.\\
+Por lo tanto, $D_{F}^{2}[x]=F'(u)$ que claramente es lineal y continua.\\
+Como $F'(u)$ es constante en $\cL_{2}(V_{1},V_{2};W)$, claramente $D_{F}^{3}(u)[x]=0_{\cL_{2}(V_{1},V_{1};W)}$ además es lineal y super continua.\\
+De esto último, sabemos que en cualquier espacio, las constantes son de clase $\cC^{\infty}$ y por ende $F$ es de clase $\cC^{\infty}$, además $D_{F}^{k}[x]=0_{\cL_{k-1}(V_{1},V_{2};W)}\quad\forall k\geq 3$
+\end{prueba}
+  
+\item Sea $F\in\cL_2(V,\r)$ una función simétrica (es decir, $F[v_1,v_2]=F[v_2,v_1]$ para cualesquiera $v_1,v_1\in V$). Prueba que la función
+  \begin{equation*}
+    Q:V\to\r,\qquad Q(v)=\tfrac{1}{2}F[v,v],
+  \end{equation*}
+es de clase $\cC^\infty$ y calcula todas sus derivadas.
+\begin{prueba}
+Sean $u,v\in V$.\\
+Notemos que 
+\begin{equation*}
+\begin{split}
+Q(u+v)-Q(u) & =\frac{1}{2}F[u+v,u+v]-\frac{1}{2}F[u,u]\\
+& = \frac{1}{2}F[u,u]+\frac{1}{2}F[u,v]+\frac{1}{2}F[v,u]+\frac{1}{2}F[v,v]-\frac{1}{2}F[u,u]\\
+& = \frac{1}{2}F[u,v]+\frac{1}{2}F[u,v]+\frac{1}{2}F[v,v]\\
+& = F[u,v]+\frac{1}{2}F[v,v]
+\end{split}
+\end{equation*}
+Así, proponemos $Q'(u)[x]=F[u,x]$ y tenemos que se cumple lo siguiente
+\begin{equation*}
+Q(u+v)-Q(u)-Q'(u)[v]=\frac{1}{2}F[v,v]
+\end{equation*}
+Y dado que $F$ es bilineal, $\exists c\in{\R}$ tal que 
+\begin{equation*}
+\frac{\abs{F[v,v]}}{2}\leq\frac{c\norm{v}_{V}^{2}}{2}
+\end{equation*}
+Por lo que tenemos que 
+\begin{equation*}
+\begin{split}
+\displaystyle\lim_{v\rightarrow 0}\dfrac{\abs{Q(u+v)-Q(u)-Q'(u)[v]}}{\norm{v}_{V}} & = \lim_{v\rightarrow 0}\dfrac{\abs{F[v,v]}}{2\norm{v}_{V}}\\
+& \leq \lim_{v\rightarrow 0}\dfrac{c\norm{v}_{V}^{2}}{2\norm{v}_{V}}=\lim_{v\rightarrow 0}\dfrac{c}{2}\norm{v}_{V}=0
+\end{split}
+\end{equation*}
+Ahora veamos que $Q'(u)[x]$ es lineal\\
+Sean $x,y\in V,\lambda,\mu \in{\R}$
+\begin{equation*}
+\begin{split}
+Q'(u)[\lambda x+\mu y] & = F[u,\lambda x+\mu y]\\
+& = F[u,\lambda x]+F[u,\mu y]\\
+& = \lambda F[u,x]+\mu F[u,y]\\
+& = \lambda Q'(u)[x]+\mu Q'(u)[y]
+\end{split}
+\end{equation*}
+Y por lo tanto $Q'(u)[x]$ es lineal. Ahora veamos que es continua; para esto veamos que es continua en $0$.
+Sea $x\in V$ y sea $\varepsilon>0$\\
+\begin{center}
+$\abs{Q'(u)[x]}=\abs{F[u,x]}\leq c_{1}\norm{u}_{V}\norm{x}_{V}<\varepsilon$ si $\norm{x}_{V}<\dfrac{\varepsilon}{c_{1}
+\norm{u}_{V}}$
+\end{center}
+Así, $Q'(u)[x]$ es la función que buscamos.\\
+Ahora, análogo al ejercicio anterior, proponemos $D^{2}_{Q}(u)[x]=Q'(u)$, donde claramente se cumple que 
+\begin{equation*}
+\displaystyle\lim_{v\rightarrow 0}\dfrac{\norm{Q'(u+v)-Q'(u)-Q'(v)}_{\cL(V,{\R})}}{\norm{v}_{V}}=0
+\end{equation*}
+Donde claramente $Q'(u)$ es lineal y continua.\\
+Y como $Q'(u)$ es constante en $\cL_{2}(V,{\R})$, tenemos que $D^{3}_{Q}(u)[x]$ es cero en $\cL_{2}(V,{\R})$ y de esto último, $Q$ es de clase $\cC^{\infty}$ y $D^{k}_{Q}(u)[x]=0\quad\forall k\geq 3$
+\end{prueba}
+
+\item Sea $K:[a,b]\times [a,b]\to\r$ una función continua y simétrica. Definimos $\vp:\cC^0[a,b]\to\r$ como
+  \begin{equation*}
+    \vp(u):=\frac{1}{2}\int_a^b\int_a^bK(x,y)u(x)u(y)\,\d x\,\d y.
+  \end{equation*}
+  \begin{enumerate}
+  \item Prueba que $\vp$ es de clase $\cC^\infty$ y calcula todas sus derivadas. (\emph{Sugerencia:} Usa el ejercicio anterior).
+  \begin{prueba}
+  Definimos $F:(\cC^{0}([a,b]))^{2}\longrightarrow{\R}$, dada por 
+  \begin{equation*}
+  \displaystyle F[u,v]=\int_{a}^{b}\int_{a}^{b}K(x,y)u(x)v(y)dxdy
+  \end{equation*}
+  Veamos que $F$ es bilineal, para esto, basta ver que es lineal entrada a entrada.\\
+  Sean $f,g\in\cC^{0}([a,b]),\lambda,\mu \in {\R}$
+  \begin{equation*}
+  \begin{split}
+  F[\lambda f+\mu g,v] & = \displaystyle\int_{a}^{b}\int_{a}^{b}K(x,y)(\lambda f+\mu g)(x)v(y)dxdy\\
+  & = \int_{a}^{b}\int_{a}^{b}K(x,y)[\lambda f(x)+\mu g(x)]v(y)dxdy\\
+  & = \int_{a}^{b}\int_{a}^{b}[K(x,y)\lambda f(x)+K(x,y)\mu g(x)]v(y)dxdy\\
+  & = \int_{a}^{b}\int_{a}^{b}[K(x,y)\lambda f(x)v(y)]+[K(x,y)\mu g(x)v(y)]dxdy\\
+  & =\lambda \int_{a}^{b}\int_{a}^{b}K(x,y)f(x)v(y)dxdy+\mu\int_{a}^{b}\int_{a}^{b}K(x,y)g(x)v(y)dxdy\\
+  & = \lambda F[f,v]+\mu F[g,v]
+  \end{split}
+  \end{equation*}
+  Así, $F$ es lineal en la primera entrada.\\
+  De manera análoga, podemos ver que también lo es en la segunda entrada y por ende $F$ es bilineal.\\
+  Ahora veamos que $F$ es continua, nuevamente, para esto solo nos basta ver que $F$ es continua en $(0,0)-$.\\
+  Sean $f,g\in\cC^{0}([a,b])$ y $\varepsilon>0$, dado que $F$ es bilineal, tenemos que existe $c\in{\R}$ tal que \\
+  \begin{equation*}
+  \begin{split}
+\abs{F[f,g]} & \leq c\norm{f}_{\infty}\norm{g}_{\infty}\\
+& \leq c\norm{[f,g]}_{[\cC^{0}([a,b])]^{2}}^{2}<\varepsilon
+  \end{split} 
+  \end{equation*} Si tomamos $\norm{[f,g]}_{[\cC^{0}([a,b])]^{2}}<\dfrac{\sqrt{\varepsilon}}{\sqrt{c+1}}$.\\
+  Así, $F$ es continua en $[\cC^{0}([a,b])]^{2}$.\\
+  Por último, veamos que es simétrica, tomamos $u,v\in\cC^{0}([a,b])$.\\
+  Queremos ver que $F[u,v]=F[v,u]$, donde $K$ es simétrica.
+  \begin{equation*}
+  F[u,v]=\int_{a}^{b}\int_{a}^{b}K(x,y)u(x)v(y)dxdy=\int_{a}^{b}\int_{a}^{b}K(y,x)v(y)u(x)dxdy=F[v,u]
+  \end{equation*}
+  Haciendo el respectivo cambio de variable $x=y$ se tiene la igualdad anterior.\\
+  Por ende, ya tenemos las hipótesis del ejercicio 2 de esta tarea, donde $\vp(u)=\dfrac{1}{2}F[u,u]$ y por ende
+\begin{center}  
+   $\vp'(u)[v]=F[u,v]=\displaystyle\int_{a}^{b}\int_{a}^{b}K(x,y)u(x)v(y)dxdy$ 
+   \end{center}
+   Además sabemos que $D^{2}_{\vp}(u)[v]=\vp'(u)$ y $D^{k}_{\vp}(u)[v]=0_{\cL_{k-1}(\cC^{0}([a,b]),{\R})}\quad\forall k\geq 3$
+  \end{prueba}
+  \item Para $k\geq 2$ calcula la expansión de Taylor de grado $k$ de $\vp$ alrededor de $u_0$ y calcula el residuo $r_k(v)$.\\
+  \textit{Solución.}
+  Sea $u_{0}\in\cC^{0}([a,b])$.\\
+  Del inciso anterior, vimos que $D^{k}_{\vp}=0\quad\forall k\geq 3$ y por el teorema de Taylor, tenemos que 
+  \begin{equation*}
+  \begin{split}
+  \vp(u_{0}+v) & =\vp(u_{0})+D_{\vp}(u_{0})[v]+\frac{1}{2}D_{\vp}^{2}(u_{0})[v,v]\\
+  & = \vp(u_{0})+\vp'(u_{0})[v]+\frac{1}{2}\vp''(u_{0})[v,v]\\
+  & = \vp(u_{0})+\vp'(u_{0})[v]+\frac{1}{2}\vp'(v)[v]\\
+  & = \frac{1}{2}F[u_{0},u_{0}]+F[u_{0},v]+\dfrac{1}{2}F[v,v]\\
+  & = \int_{a}^{b}\int_{a}^{b}K(x,y)u_{0}(x)u_{0}(y)dxdy+\int_{a}^{b}\int_{a}^{b}K(x,y)u_{0}(x)v(y)dxdy+\\
+  & \int_{a}^{b}\int_{a}^{b}K(x,y)v(x)v(y)dxdy
+  \end{split}
+  \end{equation*}
+  Y por el inciso anterior y lo que mencionamos al inicio, $r_{2}(v)=0$, ya que $D^{3}_{\vp}=0$
+  \end{enumerate}
+
+\end{enumerate}
+  
+\end{document}
