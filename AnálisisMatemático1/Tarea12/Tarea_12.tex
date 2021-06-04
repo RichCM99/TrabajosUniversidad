@@ -1,0 +1,345 @@
+\documentclass[10pt,a4paper]{article}
+
+% Idioma y unicode para acentos
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish,mexico]{babel}
+
+% Para mejores márgenes
+\usepackage{geometry}
+\usepackage{fancyhdr} %este lo puse yo
+\usepackage{setspace}
+
+% Paquetes estándar de matemáticas
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % para la familia \mathscr
+
+% Teoremas 
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposición}
+\newtheorem{lem}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definición}
+\newtheorem{pre}{Pregunta}
+
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+% Respuesta
+\newenvironment{prueba}{\renewcommand{\proofname}{Prueba}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+
+% Enumeración
+\usepackage{enumitem}
+
+% Tablas bonitas
+\usepackage{booktabs}
+
+% Diagramas
+\usepackage{tikz-cd}
+
+% Verbatim
+\usepackage{fancyvrb}
+
+% Color y Links
+\usepackage{xcolor}
+\definecolor{mine}{RGB}{0.3,0,0}
+\usepackage{hyperref}
+\hypersetup{final,hidelinks, colorlinks, linkcolor = mine, citecolor = mine,
+  urlcolor = mine}
+
+%% Valor absoluto y norma
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Conjuntos de números
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+
+\def\r{\mathbb{R}}
+\def\rn{\mathbb{R}^n}
+\def\z{\mathbb{Z}}
+\def\n{\mathbb{N}}
+\def\s{\mathbb{S}}
+\def\eps{\varepsilon}
+\def\o{\Omega}
+\def\vp{\varphi}
+\def\rh{\rightharpoonup}
+\def\io{\int_{\Omega}}
+\def\irn{\int_{\r^n}}
+\def\d{\mathrm{d}}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\sin{\mathrm{sen}}
+\def\id{\mathrm{id}}
+
+
+\begin{document}
+
+\title{Tarea 12}
+\date{\today}
+\author{Ricardo Cruz Martínez}
+\maketitle
+
+\begin{enumerate}
+
+\item Prueba que la función $\vp:\cC^0[0,1]\to\r$ dada por
+  \begin{equation*}
+    \vp(u):=\int_0^1u^2
+  \end{equation*}
+  es diferenciable y calcula su derivada.
+  \begin{prueba}
+  Sean $u,v\in \cC^{0}([0,1])$, afirmamos que 
+  \begin{center}
+  $\displaystyle\lim_{v\rightarrow 0}\dfrac{\abs{\varphi(u+v)-\varphi(u)-\displaystyle\int_{0}^{1}2uv}}{\norm{v}_{\infty}}=0$
+  \end{center}
+  En efecto
+  \begin{equation}
+  \begin{split}
+  0\leq\displaystyle\lim_{v\rightarrow 0}\dfrac{\abs{\varphi(u+v)-\varphi(u)-\displaystyle\int_{0}^{1}2uv}}{\norm{v}_{\infty}} & = \lim_{v\rightarrow 0}\dfrac{\abs{\displaystyle\int_{0}^{1}(u+v)^{2}-\int_{0}^{1}u^{2}-\int_{0}^{1}2uv}}{\norm{v}_{\infty}} \\
+  & =\lim_{v\rightarrow 0}\dfrac{\abs{\displaystyle\int_{0}^{1}u^{2}+2uv+v^{2}-2uv}}{\norm{v}_{\infty}}=\lim_{v\rightarrow 0}\dfrac{\abs{\displaystyle\int_{0}^{1}v^{2}}}{\norm{v}_{\infty}} \\
+  & \leq \displaystyle\lim_{v\rightarrow 0}\dfrac{\displaystyle\int_{0}^{1}\abs{v^{2}}}{\norm{v}_{\infty}}=\lim_{v\rightarrow 0}\dfrac{\displaystyle\int_{0}^{1}v^{2}}{\norm{v}_{\infty}}
+  \end{split}
+  \end{equation}
+  Ahora, como $\varphi(v)=\norm{v}_{2}^{2}\leq\norm{v}_{\infty}^{2}$, tenemos que 
+  \begin{equation}
+  \displaystyle\lim_{v\rightarrow 0}\dfrac{\displaystyle\int_{0}^{1}v^{2}}{\norm{v}_{\infty}}=\lim_{v\rightarrow 0}\dfrac{\norm{v}_{2}^{2}}{\norm{v}_{\infty}}\leq\lim_{v\rightarrow 0}\dfrac{\norm{v}_{\infty}^{2}}{\norm{v}_{\infty}}=\lim_{v\rightarrow 0}\norm{v}_{\infty}=0
+  \end{equation}
+  Así, de (1) y (2), tenemos que 
+  \begin{center}
+  $\displaystyle\lim_{v\rightarrow 0}\dfrac{\abs{\varphi(u+v)-\varphi(u)-\displaystyle\int_{0}^{1}2uv}}{\norm{v}_{\infty}}=0$
+  \end{center}
+  Finalmente veremos que $f(v):=\displaystyle\int_{0}^{1}2uv$ es lineal y continua.\\
+  Sean $\lambda,\mu\in{\R}$, $v,w\in \cC^{0}([0,1])$.\\
+  \begin{equation*}
+  \begin{split}
+  f(\lambda u+\mu w) & = \displaystyle\int_{0}^{1}2u(\lambda v+\mu w)=\lambda\int_{0}^{1}2uv+\mu\int_{0}^{1}2uw=\lambda f(v)+\mu f(w)
+  \end{split}
+  \end{equation*}
+  Así, tenemos que $f$ es lineal.\\
+  Dado que $f$ es lineal y está definida en espacios normados, por la \textit{Tarea 3}, basta ver que $f$ es continua en $0$.\\
+  Sea $\varepsilon>0$\\
+  Queremos ver que $\exists\delta>0$ tal que si $\norm{v}_{\infty}<\delta$, entonces $\abs{f(v)}<\varepsilon$.\\
+  Proponemos $\delta=\dfrac{\varepsilon}{2\norm{u}_{1}}$
+  \begin{equation*}
+  \begin{split}
+  \abs{f(v)}& =\abs{\displaystyle\int_{0}^{1}2uv}\leq\displaystyle\int_{0}^{1}\abs{2uv}=2\int_{0}^{1}\abs{u}\abs{v}\leq 2\int_{0}^{1}\abs{u}\norm{v}_{\infty}=2\norm{v}_{\infty}\int_{0}^{1}\abs{u}<2\delta\norm{u}_{1}\\ &=\dfrac{2\varepsilon\norm{u}_{1}}{2\norm{u}_{1}}=\varepsilon
+  \end{split}
+  \end{equation*}
+  $\therefore f$ es continua en $0$, y por ende, $f$ es continua.\\
+  Por lo que podemos concluir que $\varphi$ es diferenciable y su derivada es $f$ 
+  \end{prueba}
+  
+\item \textbf{Definición.} Un subconjunto $A$ de un espacio métrico $X$ es \textbf{conexo} si para cualesquiera $x,y\in A$ existe una trayectoria de $x$ a $y $ en $A$.
+\medskip
+
+  Prueba que, si $\o$ es un subconjunto abierto y conexo de un espacio de Banach $V$, \ $\vp:\o\to W$ es
+  diferenciable en $\o$ y $\vp'(u)=0$ para todo $u\in\o$, entonces $\vp$ es constante en $\o$.
+  \begin{proof}
+    Sea $x\in \Omega$.\\
+    Primero veamos que $\varphi$ es constante en cualquier bola con centro en $x$ y radio $\delta$ contenida en $\Omega$.\\
+    Por hipoótesis, $\Omega$ es abierto, así $\exists \delta>0$ tal que $B(x,\delta)\subseteq\Omega$.\\
+    Como $B(x,\delta)$ es convexa $(*)$, $\forall y\in B(x,\delta)$, se tiene que 
+    \begin{center}
+      $(1-t)x+ty\in B(x,\delta)\quad \forall t\in[0,1]$
+    \end{center} 
+    Una vez dicho esto, tenemos la hipótesis del $\textit{Corolario 9.17}$, con lo que tenemos lo siguiente
+    \begin{center}
+      $\norm{\varphi(y)-\varphi(x)}_{W}\leq \sup_{t\in[0,1]}\norm{\varphi'(u_{t})}_{\cL(V,W)}\norm{x-y}_{V}$
+    \end{center}
+    Donde $u_{t}=(1-t)x+ty$, y como $B(x,\delta)\subseteq\Omega\Rightarrow \varphi'(u_{t})=0$ (esto último se cumple por hipótesis).\\
+    $\therefore\norm{\varphi'(u_{t})}_{\cL(V,W)}=0$\\
+    Por lo que tenemos que $\norm{\varphi(y)-\varphi(x)}_{W}\leq 0$, y por propiedades de la norma, se sigue $\norm{\varphi(y)-\varphi(x)}_{W}=0$, de esto concluimos $\varphi(y)=\varphi(x)\quad\forall y\in B(x,\delta)$.\\
+    Por otra parte, como $\varphi$ es diferenciable en $\Omega$, entonces $\varphi$ es continua (esto se sigue de la \textit{proposición 9.11} probada en clase).\\
+    Sea $x_{0}\in\Omega$.\\
+    Definimos $H=\{z\in\Omega:f(z)=f(x_{0})\}$, claramente $H\subseteq\Omega$.\\
+    Afirmamos que $H$ es abierto en $\Omega$.\\
+    Sea $x\in H\subseteq\Omega$, como $\Omega$ es abierto, $\exists\delta>0$ tal que $B(x,\delta)\subseteq\Omega$, y por lo mencionado al inicio, se sigue que $\varphi(y)=\varphi(x_{0})\quad\forall y\in B(x,\delta)$.\\
+    $\therefore B(x,\delta)\subseteq H$.\\
+    De esto tenemos que $H\subseteq int(H)$, por lo que $H$ es abierto en $\Omega$.\\
+    Por otra parte, afirmamos que $H$ también es cerrado.\\
+    Veamos que $\Omega\setminus H$ es abierto, más aún, veremos que $\Omega\setminus H=\emptyset$\\
+    Donde $\Omega\setminus H=\{z\in\Omega:\varphi(z)\neq \varphi(x_{0})\}$, supongamos por contradicción que $\Omega\setminus H\neq\emptyset$.\\
+    Así $\exists\bar{x}\in\Omega\setminus H\Rightarrow \varphi(\bar{x})\neq \varphi(x_{0})$ y como $\Omega$ es abierto, tenemos que $\exists\delta>0$ tal que $B(\bar{x},\delta)\subseteq\Omega$ y por lo mencionado al inicio, tendríamos que $\forall y\in B(\bar{x},\delta) \quad \varphi(y)\neq \varphi(x_{0})$, lo que claramente contradice el hecho de que $\varphi$ es continua.\\
+    De esto último se sigue que $\Omega\setminus H=\emptyset$.\\
+    $\therefore H$ es cerrado.\\
+    Y con esto, hemos probado que $\varphi$ es constante en cualquier bola.\\
+    Finalmente, como $\Omega$ es conexo y $H$ es abierto y cerrado, tenemos que $H=\Omega$, además $H\neq\emptyset$, ya que $x_{0}\in H$, de esto se sigue que $\varphi$ es constante $(**)$.
+    \end{proof}
+    \textit{Justificaciones}
+    \begin{enumerate}
+    \item[$(*)$] Sea $W$ un espacio métrico normado no vacío. \\
+    Sea $x\in W$, entonces dada $\delta>0$, $B(x,\delta)$ es convexa.
+    \begin{prueba}
+      Sea $y\in B(x,\delta)$, así $\norm{x-y}<\delta$.\\
+      Para la demostración anterior, solo nos basta ver que\\
+      \begin{center}
+      $(1-t)x+ty\in B(x,\delta)\quad\forall t\in [0,1]$.
+      \end{center}
+      Sea $t\in[0,1]$\\
+      \begin{equation*}
+      \begin{split}
+      \norm{(1-t)x+ty-x}_{W} & = \norm{(1-t-1)x+ty}_{W}=\norm{-tx+ty}_{W} 
+      \\ & = \abs{t}\norm{y-x}_{W}\leq\norm{x-y}_{W}<\delta
+      \end{split}
+      \end{equation*}
+      $\therefore (1-t)x+ty\in B(x,\delta)$
+    \end{prueba}
+    
+    \item[$(**)$] Como $\Omega$ es conexo, entonces no existen $U,V\subseteq\Omega$ (abiertos o cerrados) tales que $U\cap V=\emptyset$ y $\Omega=U\cup V$, ya que hay una trayectoria que une a cualesquiera dos puntos.\\
+    Una vez dicho esto, veamos que si $\Omega$ es conexo, entonces los únicos conjuntos abiertos y cerrados en $\Omega$ son $\Omega$ y $\emptyset$.
+    \begin{prueba}
+    Supongamos por contradicción que existe $\emptyset\neq A\subsetneq\Omega$, donde $A$ es abierto y cerrado, por ende $\Omega\setminus A$ es abierto y como $a\cap (\Omega\setminus A)=\emptyset$ y se tiene que $\Omega=A\cup(\Omega\setminus A)$ con $A$ y $\Omega\setminus A$ abiertos, lo cual es absurdo, pues $\Omega$ es conexo.
+    \end{prueba}
+     \end{enumerate}
+
+\item Considera la función
+  \begin{equation*}
+    \vp:\ell_1\to\r,\qquad\vp(\overline x):=\|\overline x\|_{\ell_1}=\sum_{k=1}^\infty|x_k|.
+  \end{equation*}
+  Prueba que $\vp$ es Gâteaux-diferenciable en $\overline x=(x_k)$ si y sólo si
+    $x_k\neq 0$ para todo $k\in\n$. Calcula la derivada de Gâteaux $\cG\vp(\overline x)$ en ese caso.
+    \begin{prueba}
+    \begin{enumerate}
+    \item[$\Rightarrow)$] Supongamos que $\varphi$ es Gâteaux-diferenciable en $\bar{x}=(x_{k})$.\\
+    Queremos ver que $x_{k}\neq 0\quad\forall k\in{\N}$\\
+    Supongamos por contradicción que $\exists k_{0}\in{\N}$ tal que $x_{k_{0}}=0$.\\
+    Por hipótesis, $\varphi$ es Gâteaux-diferenciable en $\bar{x}$, por lo que 
+    \begin{center}
+    $\displaystyle\lim_{t\rightarrow 0}\dfrac{\varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})}{t}$ existe $\forall v\in \ell_{1}$
+    \end{center}
+    En particular si tomamos 
+    $\bar{v}:=v_{k}= \left\{ \begin{array}{lcc}
+             1 &   si  & k=k_{0} \\
+             \\ 0 & si & k\neq k_{0}
+             \end{array}
+   \right.$, claramente $\bar{v}\in\ell_{1}$, además tenemos que 
+   \begin{equation*}
+   \begin{split}
+   \displaystyle\varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})&=\sum_{k=1}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=1}^{\infty}\abs{x_{k}}\\
+   &=\sum_{k=1}^{k_{0}-1}\abs{x_{k}}+\abs{tv_{k_{0}}}+\sum_{k=k_{0}+1}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=1}^{\infty}\abs{x_{k}}\\
+   &=\sum_{k=1}^{k_{0}-1}\abs{x_{k}}+\abs{t}+\sum_{k=k_{0}+1}^{\infty}\abs{x_{k}}-\sum_{k=1}^{\infty}{x_{k}}\\
+   &=\sum_{k=1}^{k_{0}-1}\abs{x_{k}}+\abs{t}+\sum_{k=k_{0}+1}^{\infty}\abs{x_{k}}-\sum_{k=1}^{\infty}\abs{x_{k}}\\
+   &=\sum_{k=1}^{k_{0}-1}\abs{x_{k}}+\sum_{k=k_{0}+1}^{\infty}\abs{x_{k}}-\sum_{k=1}^{k_{0}-1}\abs{x_{k}}-\sum_{k=k_{0}+1}^{\infty}\abs{x_{k}}+\abs{t}\\ &= \abs{t}
+   \end{split}
+   \end{equation*}
+   $\therefore \varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})=\abs{t}$.\\
+   Por ende, tenemos que
+   \begin{center}
+   $\displaystyle\lim_{t\rightarrow 0}\dfrac{\varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})}{t}=\lim_{t\rightarrow 0}\dfrac{\abs{t}}{t}$
+   \end{center}
+   Sin embargo, notemos lo siguiente
+   \begin{center}
+   $\displaystyle\lim_{t\rightarrow 0^{-}}\dfrac{\abs{t}}{t}=\lim_{t\rightarrow 0^{-}}\dfrac{-t}{t}=\lim_{t\rightarrow 0^{-}}-1=-1$ \\
+   $\displaystyle\lim_{t\rightarrow 0^{+}}\dfrac{\abs{t}}{t}=\lim_{t\rightarrow 0^{+}}\dfrac{t}{t}=\lim_{t\rightarrow 0^{+}}1=1$
+   \end{center}
+   Por lo que $\displaystyle\lim_{t\rightarrow 0}\dfrac{\abs{t}}{t}$ no existe, lo cual es absurdo.\\
+   $\therefore x_{k}\neq 0\quad\forall k\in{\N}$
+   \item[$\Leftarrow)$] Supongamos que $x_{k}\neq 0\quad\forall k\in{\N}$\\
+   Queremos probar que $\varphi$ es Gâteaux-diferenciable en $\bar{x}=(x_{k})$.\\
+   Sea $\bar{v}\in\ell_{1}$\\
+   Afirmamos que 
+   \begin{center}
+   $\displaystyle\lim_{t\rightarrow 0}\dfrac{\varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})}{t}=\sum_{k=1}^{\infty}f(v_{k})$
+   \end{center}
+   Donde $f(v_{k})= \left\{ \begin{array}{lcc}
+             v_{k} &   si  & x_{k}>0 \\
+             \\ -v_{k} &  si & x_{k}<0
+             \end{array}
+   \right.$\\
+   Ahora, como $\bar{v}\in\ell_{1}\Rightarrow\displaystyle\sum_{k=1}^{\infty}\abs{v_{k}}$ converge.\\
+   Además, de cálculo 2, sabemos que si $\displaystyle\sum_{k=1}^{\infty}\abs{f(v_{k})}=\sum_{k=1}^{\infty}\abs{v_{k}}$ converge, entonces $\displaystyle\sum_{k=1}^{\infty}f(v_{k})$ también converge.\\
+   Sea $\varepsilon>0$\\
+   Como $\displaystyle\sum_{k=1}^{\infty}\abs{v_{k}}$ converge, entonces $\exists N\in{\N}$ tal que $\displaystyle\sum_{k=N}^{\infty}\abs{v_{k}}<\dfrac{\varepsilon}{2}$.\\
+   Ahora, dada $n<N$, $x_{n}$ es positiva ó negativa
+   \begin{enumerate}
+   \item[Caso 1)] $x_{n}>0$\\
+   Si $x_{n}>0\Rightarrow\exists\delta_{n}>0$ tal que $x>0\quad\forall x\in B(x_{n},\delta_{n})$, así tenemos que 
+   \begin{center}
+   $\abs{x_{k}+tv_{k}}=x_{k}+tv_{k}$ si $\abs{t}<\dfrac{\delta_{n}}{\abs{v_{k}}}$
+   \end{center}
+   Por ende
+   \begin{center}
+   $\abs{x_{k}+tv_{k}}-\abs{x_{k}}=x_{k}+tv_{k}-x_{k}=tv_{k}$
+   \end{center}
+   \item[Caso 2)] $x_{n}<0$\\
+   Si $x_{n}<0\Rightarrow\exists\delta_{n}>0$ tal que $x<0\quad\forall x\in B(x_{n},\delta_{n})$, así
+   \begin{center}
+   $\abs{x_{k}+tv_{k}}=-x_{n}-tv_{k}$ si $\abs{t}<\dfrac{\delta_{n}}{\abs{v_{k}}}$
+   \end{center}
+   Por lo tanto 
+   \begin{center}
+   $\abs{x_{k}+tv_{k}}-\abs{x_{k}}=-x_{k}-tv_{k}+x_{k}=-tv_{k}$
+   \end{center}
+   Ahora, definimos $\bar{\delta_{n}}=\dfrac{\delta_{n}}{\abs{v_{k}}}$
+   \end{enumerate}
+   Y tomando dicha delta para los valores $n<N$, tenemos que 
+   \begin{center}
+   $\dfrac{\displaystyle\sum_{k=1}^{N-1}{\abs{x_{k}+tv_{k}}-\sum_{k=1}^{N-1}\abs{x_{k}}}}{t}=\dfrac{\displaystyle\sum_{k=1}^{N-1}tf(v_{k})}{t}=\displaystyle\sum_{k=1}^{N-1}f(v_{k})$ si $\abs{t}<\delta'=\displaystyle\min_{n<m}\{\bar{\delta_{n}}\}$
+   \end{center}
+   Finalmente, tomando $\delta=\min\{\delta',1\}$, si $\abs{t}\leq\delta$, tenemos que 
+   \begin{equation*}
+   \begin{split}
+   \abs{\dfrac{\displaystyle\sum_{k=1}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=1}^{\infty}\abs{x_{k}}}{t}-\displaystyle\sum_{k=1}^{\infty}f(v_{k})}
+   &=\left\vert\dfrac{\displaystyle\sum_{k=1}^{N-1}\abs{x_{k}+tv_{k}}-\sum_{k=1}^{N-1}\abs{x_{k}}}{t}+\dfrac{\displaystyle\sum_{k=N}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=N}^{\infty}\abs{x_{k}}}{t}\right.\\
+   &\left.-\displaystyle\sum_{k=1}^{N-1}f(v_{k})-\sum_{k=N}^{\infty}f(v_{k})\right\vert \\
+   &=\abs{\displaystyle\sum_{k=1}^{N-1}f(v_{k})+\dfrac{\displaystyle\sum_{k=N}^{\infty}{\abs{x_{k}+tv_{k}}-\sum_{k=N}^{\infty}\abs{x_{k}}}}{t}-\sum_{k=1}^{N-1}f(v_{k})-\sum_{k=N}^{\infty}f(v_{k})}\\
+   &=\abs{\dfrac{\displaystyle\sum_{k=N}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=N}^{\infty}\abs{x_{k}}}{t}-\displaystyle\sum_{k=N}^{\infty}f(v_{k})}\\
+   &\leq\abs{\dfrac{\displaystyle\sum_{k=N}^{\infty}\abs{x_{k}+tv_{k}}-\sum_{k=N}^{\infty}\abs{x_{k}}}{t}}+\abs{\displaystyle\sum_{k=N}^{\infty}f(v_{k})}\\
+   &\leq\abs{\displaystyle\sum_{k=N}^{\infty}\dfrac{\abs{x_{k}}}{t}+\sum_{k=N}^{\infty}\dfrac{\abs{tv_{k}}}{t}-\sum_{k=N}^{\infty}\dfrac{\abs{x_{k}}}{t}}+\abs{\displaystyle\sum_{k=N}^{\infty}f(v_{k})}\\
+   &=\abs{\displaystyle\sum_{k=N}^{\infty}\dfrac{\abs{tv_{k}}}{t}}+\abs{\displaystyle\sum_{k=N}^{\infty}f(v_{k})}\\
+   &\leq\displaystyle\sum_{k=N}^{\infty}\abs{v_{k}}+\sum_{k=N}^{\infty}\abs{f(v_{k})}=\displaystyle\sum_{k=N}^{\infty}\abs{v_{k}}+\sum_{k=N}^{\infty}\abs{v_{k}}\\
+   &=2\sum_{k=N}^{\infty}\abs{v_{k}}<\dfrac{2\varepsilon}{2}=\varepsilon
+   \end{split}
+   \end{equation*}
+   $\therefore\displaystyle\lim_{t\rightarrow 0}\dfrac{\varphi(\bar{x}+t\bar{v})-\varphi(\bar{x})}{t}=\sum_{k=1}^{\infty}f(v_{k})$\\
+   Ahora veamos que $\displaystyle\sum_{k=1}^{\infty}f(v_{k})$ es continua.\\
+   Sean $a,y\in\ell_{1}$, donde $a=(a_{k}),y=(y_{k})$.
+   \begin{center}
+   $\abs{\displaystyle\sum_{k=1}^{\infty}f(a)-\sum_{k=1}^{\infty}f(y)}\leq\sum_{k=1}^{\infty}\abs{f(a)-f(y)}=\sum_{k=1}^{\infty}\abs{a_{k}-y_{k}}=\norm{a-y}_{\ell_{1}}$
+   \end{center}
+   Por lo que la función dada por $\bar{G}(\bar{x})=\displaystyle\sum_{k=1}^{\infty}f(x_{k})$ es lipschitz continua y por ende, es continua.\\
+   Veamos que $\bar{G}$ es lineal.
+   Sean $a,b\in\ell_{1},\lambda,\mu\in{\R}$
+   \begin{enumerate}
+   \item[Caso 1)] Si $x_{n}<0$\\
+   \begin{equation*}
+   \begin{split}
+   \bar{G}(\lambda a+\mu b)&=\displaystyle\sum_{k=1}^{\infty}f(\lambda a+\mu b)=\sum_{k=1}^{\infty}-\lambda a-\mu b=\lambda\sum_{k=1}^{\infty}-a+\mu\sum_{k=1}^{\infty}-b\\&=\lambda\sum_{k=1}^{\infty}f(a)+\mu\sum_{k=1}^{\infty}f(b)
+   \end{split}
+   \end{equation*}
+   \item[Caso 2)] Si $x_{n}>0$\\
+   Se hace de manera análoga al caso 1
+    \end{enumerate}
+    Así $\bar{G}(\lambda a+\mu b)=\displaystyle\lambda\sum_{k=1}^{\infty}f(a)+\mu\sum_{k=1}^{\infty}f(b)=\lambda\bar{G}(a)+\mu\bar{G}(b)$\\
+    $\therefore \bar{G}$ es lineal\\
+    $\therefore \varphi$ es Gâteaux-diferenciable y si derivada $\cG_{\varphi}(\bar{x})=\displaystyle\sum_{k=1}^{\infty}f(x_{k})$
+    \end{enumerate}
+    \end{prueba}
+
+\end{enumerate}
+  
+\end{document}
