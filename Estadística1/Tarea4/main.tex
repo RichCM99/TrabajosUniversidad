@@ -1,0 +1,275 @@
+\documentclass[10pt,a4paper]{article}
+
+% Idioma y unicode para acentos
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+
+% Para mejores márgenes
+\usepackage{geometry}
+\usepackage{fancyhdr} %este lo puse yo
+\usepackage{setspace}
+
+% Paquetes estándar de matemáticas
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % para la familia \mathscr
+
+% Teoremas 
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}
+\newtheorem{prop}{Proposición}
+\newtheorem{lem}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definiciónn}
+\newtheorem{pre}{Pregunta}
+
+\theoremstyle{remark}
+
+% Respuesta
+\newenvironment{prueba}{\renewcommand{\proofname}{Prueba}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+\newenvironment{solucion}{\renewcommand{\proofname}{Solución}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+\newenvironment{respuesta}{\renewcommand{\proofname}{Respuesta}\renewcommand{\qedsymbol}{}\begin{proof}}{\end{proof}}
+
+% Enumeración
+\usepackage{enumitem}
+
+% Tablas bonitas
+\usepackage{booktabs}
+
+% Diagramas
+\usepackage{tikz-cd}
+
+% Verbatim
+\usepackage{fancyvrb}
+
+% Color y Links
+\usepackage{xcolor}
+\definecolor{mine}{RGB}{0.3,0,0}
+\usepackage{hyperref}
+\hypersetup{final,hidelinks, colorlinks, linkcolor = mine, citecolor = mine,
+  urlcolor = mine}
+
+%% Valor absoluto y norma
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\begin{document}
+
+\title{Tarea 3\\Inferencia Estadística}
+\date{\today}
+\author{Armenta Trejo Luis Felipe \\ Cruz Martínez Ricardo\\ Robles Leong Daniel \\ Sánchez Galván Ximena}
+\maketitle
+
+\begin{enumerate}
+% ejercicio 1 ---------------------------------------------------------------
+    \item Considerando la siguiente densidad conjunta, calcula lo que se pide
+    \begin{equation*}
+        f(x,y) = \frac{1}{8y}e^{-(\frac{x}{2y} + \frac{y}{4})} \quad x,y > 0
+    \end{equation*}
+    Encuentra la densidad marginal $f_Y (y)$ y la densidad condicional $f_{X|Y}(x|y)$, finalmente encuentre $E(Y)$ y  $Var(Y)$, así como $E(X|Y)$ y $Var(X|Y)$
+    \begin{solucion}
+    Procederemos a calcular la densidad marginal de $Y$, pero antes, calcularemos la integral indefinida
+    \begin{equation*}
+        \begin{split}
+            \int \frac{1}{8y}e^{-(\frac{x}{2y} + \frac{y}{4})} dx  & = -\frac{1}{4} \int e^{u} du = -\frac{1}{4} e^{u} = -\frac{1}{4} e^{\frac{-2x-y^2}{4y}}
+        \end{split}
+    \end{equation*}
+    Donde la primera igualdad se da haciendo el cambio de variable $u = \frac{-2x-y^2}{4y}$.\\
+    Por lo que finalmente, la densidad marginal de $Y$ está dada por 
+    \begin{equation*}
+        f_Y (y) = \int_{0}^{\infty} \frac{1}{8y}e^{-(\frac{x}{2y} + \frac{y}{4})} dx = -\frac{1}{4} e^{\frac{-2x-y^2}{4y}}\vert_{x = 0}^{\infty} = \frac{1}{4} e^{-\frac{y}{4}}
+    \end{equation*}
+    Por otra parte, la densidad condicional $f_{X|Y}(x|y)$ está dada por
+    \begin{equation*}
+        \frac{f(x,y)}{f_Y (y)} = \frac{\frac{1}{8y}e^{-(\frac{x}{2y} + \frac{y}{4})}}{\frac{1}{4} e^{-\frac{y}{4}}} = \frac{\frac{1}{8y}e^{-\frac{x}{2y}}}{\frac{1}{4}} = \frac{e^{-\frac{x}{2y}}}{2y} \quad x,y > 0
+    \end{equation*}
+    Ahora, $E(Y)$ está dada por
+    \begin{equation*}
+        \int_{0}^{\infty} y\frac{1}{4} e^{-\frac{y}{4}}dy = y e^{-\frac{y}{4}}\vert_{0}^{\infty} + \int_{0}^{\infty} e^{-\frac{y}{4}}dy = -4 e^{-\frac{y}{4}}\vert_{0}^{\infty} = 4
+    \end{equation*}
+    Donde la primera igualdad de da por la fórmula de integración por partes, tomado $f(y) = y$ y $g'(y) = \frac{1}{4} e^{-\frac{y}{4}}$, por lo tanto, $E(Y) = 4$.\\
+    Para calcular la varianza, primero encontraremos cúanto vale el segundo momento de la variable aleatoria $Y$, utilizando integración por partes dos veces, obtenemos lo siguiente
+    \begin{equation*}
+        \begin{split}
+            \int_{0}^{\infty}y^2 \frac{1}{4} e^{-\frac{y}{4}} dy & = -y^2 e^{-\frac{y^2}{4}}\vert_{0}^{\infty} + \int_{0}^{\infty} 2y e^{-\frac{y}{4}}dy \\
+            & = -8y e^{-\frac{y}{4}}\vert_{0}^{\infty} + \int_{0}^{\infty} y e^{-\frac{y}{4}}dy \\
+            & = -32 e^{-\frac{y}{4}}\vert_{0}^{\infty} \\
+            & = 32
+        \end{split}
+    \end{equation*}
+    De esta última cuenta se sigue que la varianza de $Y$ está dada por $Var(Y) = E(Y^2) - E^2 (Y) = 32 - 4^2 = 32 - 16 = 16$.\\
+    Ahora calcularemos $E(X \vert Y)$
+    \begin{equation*}
+    \begin{split}
+        E(X|Y = y) & = \int_{0}^{\infty} x \frac{e^{-\frac{x}{2y}}}{2y} dx \\
+        & = -e^{-\frac{x}{2y}}\vert_{0}^{\infty} + \int_{0}^{\infty} e^{-\frac{x}{2y}}dx \\
+        & = -2y e^{-\frac{x}{2y}}\vert_{0}^{\infty} = 2y
+    \end{split}
+    \end{equation*}
+    Donde la segunda igualdad se da usando el método de integración por partes, tomando $f(x) = \frac{1}{2y}x$ y $g'(x) = e^{-\frac{x}{2y}}$.\\
+    Por lo que, abusando de la notación, tenemos que $E(X|Y) = 2Y$.\\
+    Finalmente, procederemos a calcular $E(X^2 | Y)$, esto para poder encontrar la varianza condicional de $X$ dado $Y$, para esto, usaremos el método de integración por partes dos veces
+    \begin{equation*}
+    \begin{split}
+        \int_{0}^{\infty} \frac{x^2}{2y} e^{-\frac{x}{2y}}dx & = x^{2}e^{-\frac{x}{2y}}\vert_{0}^{\infty} + \int_{0}^{\infty} 2x e^{-\frac{x}{2y}}dx \\
+        & = \int_{0}^{\infty} 2x e^{-\frac{x}{2y}}dx \\
+        & = -4y\cdot 2y e^{-\frac{x}{2y}}\vert_{0}^{\infty} \\
+        & = -8y^{2}e^{-\frac{x}{2y}}\vert_{0}^{\infty} \\
+        & = 8y^2
+    \end{split}
+    \end{equation*}
+    Así, tenemos que $E(X^2 | Y) = 8 Y^2$ y por ende, $Var(X|Y) = 8Y^2 - 4Y^2 = 4Y^{2}$
+    \end{solucion}
+    
+% ejercicio 2 -------------------------------------------------------------
+    \item Sea $X_1 , X_2 , X_3 , X_4 , X_5$ muestra aleatoria de tamaño $n=5$ de una población con densidad dada por
+    \begin{equation*}
+        f_{X}(x;\theta) = \frac{\theta^{x}}{x!} e^{-\theta}; \quad \theta > 0; \quad x\in\{0,1,2,...\}
+    \end{equation*}
+    Considere las siguientes funciones de la muestra
+    \begin{center}
+        $\hat{\theta_1} = X_1 + X_2 + X_3 + X_4 + X_5$\\
+        $\hat{\theta_2} = X_1 + \theta X_2$\\
+        $\hat{\theta_3} = \frac{X_1 + X_2 + X_3 + X_4 + X_5}{5}$\\
+        $\hat{\theta_4} = \frac{2X_1 + 3X_2}{5}$
+    \end{center}
+    \begin{enumerate}
+        \item Indique cuáles funciones de la muestra pueden ser considerados estimadores para $\theta$ y cuáles no.
+        \begin{respuesta}
+        Claramente $\hat{\theta_2}$ no puede ser un estimador para $\theta$, pues ni siquiera es una estadística, pues depende de un parámetro desconocido ($\theta$).\\
+        Por otra parte, es claro también que $\hat{\theta_1}$ y $\hat{\theta_3}$ son estimadores para $\theta$, al igua que $\hat{\theta_4}$.
+        \end{respuesta}
+        
+        \item Indique cuáles estimadores son insesgados y cuáles sesgados.
+        \begin{solucion}
+        Veamos primero calcularemos la esperanza de $X_{1}$
+        \begin{equation*}
+            \begin{split}
+                E(X_{1}) & = \sum_{x=0}^{\infty}x\frac{\theta^x}{x!}e^{-\theta} \\
+                & = e^{-\theta} \theta \sum_{x=0}^{\infty} \frac{\theta^{x-1}}{(x-1)!}\\
+                & = e^{-\theta} \theta e^{\theta}\\
+                & = \theta
+            \end{split}
+        \end{equation*}
+        Por lo tanto, $E(X_1) = \theta$, y dado que estamos tomando en cuenta una muestra aleatoria, entonces, la esperanza de $X_2,...,X_5$ es la misma.\\
+        Ahora, veamos si $\hat{\theta_1}$ es insesgado, para esto, por linealidad de la esperanza tenemos que $E(X_1 + X_2 + X_3 + X_4 + X_5)$
+        \begin{equation*}
+            E(\hat{\theta_1}) = E(X_1 + X_2 + X_3 + X_4 + X_5) = \sum_{i=1}^{5}E(X_i) = \sum_{i=1}^{5}\theta = 5 \theta
+        \end{equation*}
+        Por lo tanto, concluimos que $\hat{\theta_1}$ es sesgado.\\
+        De la cuenta anterior, notamos que 
+        \begin{equation*}
+            E(\hat{\theta_3}) \cdot 5 = E(\hat{\theta_1}) = 5 \theta 
+        \end{equation*}
+        Por lo tanto, fácilmente tenemos que $E(\hat{\theta_3}) = \theta$ y por ende, $\hat{\theta_3}$ es un estimador insesgado.\\
+        Finalmente, veamos si $\hat{\theta_4}$ es un estimador insesgado
+        \begin{equation*}
+            E(\hat{\theta_4}) = E\left( \frac{2X_1 + 3X_2}{5} \right) = \frac{1}{5}E(2X_1 + 3X_2) = \frac{2}{5}E(X_1) + \frac{3}{5}E(X_2) = \frac{2}{5}\theta + \frac{3}{5}\theta = \theta
+        \end{equation*}
+        De esto último, cocluimos que $\hat{\theta_3}$ es también un estimador insesgado.
+        \end{solucion}
+    \end{enumerate}
+    
+% ejercicio 3 -----------------------------------------------------------
+    \item Sea $X_1 , X_2 , X_3$ una muestra aleatoria de tamaño 3 de una población con distribución $F_X (x)$ tal que $E(X_i) = \mu$ y $Var(X_i) = 1$. Calcular el error cuadrático medio para los siguientes estimadores de $\mu$ 
+    \begin{center}
+        $\hat{\mu_1} = X_1$ \qquad ; \qquad $\hat{\mu_2} = \dfrac{3X_1 - 2X_2 + X_3}{6}$
+    \end{center}
+    ¿Para qué valores de $\mu$ se tiene que $\hat{\mu_2}$ es mejor estimador que $\hat{\mu_1}$?
+    \begin{solucion}
+    Calcularemos el error cuadrático medio de $\hat{\mu_1}$, para esto, sabemos que
+    \begin{equation*}
+        E.C.M(\hat{\mu_1}) = Var(\hat{\mu_1}) + (E(\hat{\mu_1})-\mu)^{2} = Var(X_1) + (E(X_1)-\mu)^2 = 1 + (\mu - \mu)^2 = 1
+    \end{equation*}
+    Por otra parte, calcularemos el error cuadrático medio para $\hat{\mu_2}$
+\begin{equation*}
+    \begin{split}
+        E.C.M (\hat{\mu_2}) & = Var(\hat{\mu_2}) + (E(\hat{\mu_2})-\mu)^{2}\\
+        & = Var\left( \dfrac{3X_1 - 2X_2 + X_3}{6} \right) + \left( E\left( \dfrac{3X_1 - 2X_2 + X_3}{6} \right) - \mu \right)^2\\
+        & = \frac{9}{36}Var(X_1) - \frac{4}{36}Var(X_2) + \frac{1}{36}Var(X_3) + \left(\frac{3}{6}E(X_1) + \frac{2}{6} E(X_2) + \frac{1}{6}E(X_3) - \mu \right)^2\\
+        & = \frac{9}{36} - \frac{4}{36} + \frac{1}{36} + \left( \frac{3}{6}\mu + \frac{2}{6}\mu + \frac{1}{6}\mu - \mu  \right)^2\\
+        & = \frac{6}{36} \\
+        & = \frac{1}{6}
+    \end{split}
+\end{equation*}
+Por lo que respondiendo a la pregunta, dado que el error cuadrático medio de ambos estimadores resultó ser constante, podemos concluir que $\hat{\mu_2}$ es mejor estimador que $\hat{\mu_1}$ para cualquier valor de $\mu$.
+    \end{solucion}
+    
+% ejercicio 4 ---------------------------------------------------------------
+    \item Sea $X_1,...,X_n$ muestra aleatoria de tamaño $n$ de una población con distribución $F_X (x)$ tal que $E(X_i) = \mu$ y $Var(X_i) = \sigma^2$. Sea $\alpha_1 ,..., \alpha_n\in\mathbb{R}$ tales que $\sum_{i=1}^{n}\alpha_i = 1$. Defina el siguiente estimador para $\mu$
+    \begin{equation*}
+        \hat{\mu} = \sum_{i=1}^{n}\alpha_i X_i
+    \end{equation*}
+    Pruebe que
+    \begin{enumerate}
+        \item $\hat{\mu}$ es un estimador insesgado
+        \begin{prueba}
+        \begin{equation*}
+            \begin{split}
+                E(\hat{\mu}) & = E\left( \sum_{i=1}^{n}\alpha_{i} X_i \right)\\
+                & = \sum_{i=1}^{n}E(\alpha_i X_i)\\
+                & = \sum_{i=1}^{n}\alpha_i E(X_i) \\
+                & = \sum_{i=1}^{n}\alpha_i \mu\\
+                & = \mu \sum_{i=1}^{n}\alpha_i\\
+                & = \mu
+            \end{split}
+        \end{equation*}
+        Por lo tanto, concluimos que $\hat{\mu}$ es un estimador insesgado.
+        \end{prueba}
+        
+        \item La varianza de $\hat{\mu}$ se minimiza cuando $\alpha_i = \frac{1}{n}$ para toda $i\in\{1,...,n\}$. (Este inciso muestra entonces que $\Bar{X}$ es el mejor estimador lineal). Cuado ocurre esto, se dice que el estimador es BLUE (Best Linear Unbised Estimator).
+        \begin{prueba}
+        Calculemos la varianza del estimador
+        \begin{equation*}
+            \begin{split}
+                Var(\hat{\mu}) & = Var\left( \sum_{i=1}^{n}\alpha_i X_i \right) \\
+                & = \sum_{i=1}^{n}Var(\alpha_i X_i) \\
+                & = \sum_{i=1}^{n}\alpha_{i}^{2}Var(X_i)\\
+                & = \sum_{i=1}^{n}\alpha_{i}^{2}\sigma^2\\
+                & = \sigma^2\sum_{i=1}^{n}\alpha_{i}^{2}
+            \end{split}
+        \end{equation*}
+        Ahora, definimos la funcion $f:\mathbb{R}^n \longrightarrow \mathbb{R}$, dada por
+        \begin{equation*}
+            f(\alpha_1,...,\alpha_n) = \sigma^2\sum_{i=1}^{n}\alpha_{i}^{2}
+        \end{equation*}
+        Y consideramos el siguiente conjunto
+        \begin{equation*}
+            S = \{ \alpha\in\mathbb{R}^{n} : \sum_{i=1}^{n}\alpha_{i} = 1 \}
+        \end{equation*}
+        de este conjunto, es intuitivo definir la función $g:\mathbb{R}^{n}\longrightarrow \mathbb{R}$, dada por 
+        \begin{equation*}
+            g(\alpha) = \sum_{i=1}^{n}\alpha_{i}-1
+        \end{equation*}
+        Es fácil ver que $S$ es el conjunto de nivel cero de la función $g$, ahora, supongamos que $f\vert_{S}$ alcanza un minimo local (no puede ser máximo local, pues podemos tomar alguna $\alpha_{i}$ arbitrariamente grande compensando las demás), entonces, por el \textit{Teorema de los Multiplicadores de Lagrange} (visto en Cálculo 3 y Análisis 1), $\exists \lambda\in\mathbb{R}$ tal que 
+        \begin{equation*}
+            \lambda(1,...,1) = \lambda\nabla g(\alpha) = \nabla f(\alpha) = (2\sigma^{2}\alpha_{1},...,2\sigma^{2}\alpha_{n})
+        \end{equation*}
+        Por lo que nuestro problema queda resuelto si logramos resolver el siguiente sistema de ecuaciones
+        \begin{eqnarray*}
+        2\sigma^{2}\alpha_{1} & = \lambda \\
+        2\sigma^{2}\alpha_{2} & = \lambda \\
+        \vdots & \\
+        2\sigma^{2}\alpha_{n} & = \lambda
+        \end{eqnarray*}
+        Despejando $\alpha_i$, tenemos que
+        \begin{equation}
+            \alpha_i = \frac{\lambda}{2\sigma^{2}} \qquad \forall i\in\{1,...,n\}
+        \end{equation}
+        De esto, tenemos que 
+        \begin{equation*}
+            1 = \sum_{i=1}^{n}\alpha_i = \frac{n\lambda}{2\sigma^2}
+        \end{equation*}
+        Por lo que es claro que $\lambda = \frac{2\sigma^2}{n}$, así, sustituyendo el valor de $\lambda$ en la ecuación $(1)$, tenemos que
+\begin{equation*}
+    \alpha_i = \frac{2\sigma^2}{n}\frac{1}{2\sigma^2} = \frac{1}{n} \qquad \forall i \in\{1,...,n\}
+\end{equation*}
+Por ende, tenemos que la varianza de $\hat{\mu}$ se minimiza cuando $\alpha_i = \frac{1}{n}\quad\forall i \in\{1,...,n\}$
+        \end{prueba}
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
